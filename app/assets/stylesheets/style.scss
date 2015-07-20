@@ -1,0 +1,29 @@
+body {
+  background: #D3CFC8
+}
+
+
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+.img-responsive-parent {
+  margin: 0 -60px;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-default {
+    background-color: #16A496;
+    border-color: #E7E7E7;
+}
