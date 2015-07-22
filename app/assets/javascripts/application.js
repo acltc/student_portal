@@ -13,5 +13,10 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
+//= require angular
+//= require app
+//= require moment
+//= require fullcalendar
+//= require gcal
+//= require calendar
 //= require_tree .

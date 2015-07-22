@@ -1,8 +1,39 @@
 body {
-  background: #D3CFC8
+  background: #D3CFC8;
+  font-family: 'Cambay', sans-serif;
 }
 
+/////////////////// NavBar //////////////////////////
 
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-default {
+  background-color: #16A496;
+  border-color: #E7E7E7;
+}
+
+.navbar-default .navbar-brand {
+    color: #f8f8ff;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f8f8ff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+}
+
+////////////////// Welcome Page ////////////////////
 
 .row.no-gutters {
   margin-right: 0;
@@ -14,16 +45,44 @@ body {
   padding-left: 0;
 }
 
-
 .img-responsive-parent {
   margin: 0 -60px;
 }
 
-.navbar {
-  margin-bottom: 0;
+.welcome-message {
+  padding: 20px 75px 0px 0px;
+  font-size: 140%;
 }
 
-.navbar-default {
-    background-color: #16A496;
-    border-color: #E7E7E7;
+.contact-heading {
+  background: #16A496;
+  color: #FFFFFF;
+  padding: 20px;
+  font-style: italic;
+  margin: 50px 0px 0px -15px;
+}
+
+.contact-table {
+  padding-right: 75px;
+  font-size: 140%;
+}
+
+.text-align-right {
+  text-align: right;
+  padding: 10px 100px;
+}
+
+
+////////////////////// Calendar ////////////////////////////
+
+.calendar {
+  background: #FFFFFF;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 2px solid #000000;
+}
+
+.fc-unthemed .fc-today {
+  background-color: #AFDFE0;
 }
