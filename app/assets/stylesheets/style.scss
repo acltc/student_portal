@@ -33,6 +33,14 @@ body {
     color: #FFFFFF;
 }
 
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #AEAEAE;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #FFFFFF;
+}
 ////////////////// Welcome Page ////////////////////
 
 .row.no-gutters {
@@ -75,6 +83,37 @@ body {
 
 ////////////////////// Calendar ////////////////////////////
 
+h2.curriculum-heading {
+  background: #F05353;
+  padding: 20px;
+  color: #FFFFFF;
+  font-style: italic;
+  font-size: 300%;
+  margin: 120px 0px 30px 0px;
+
+}
+
+p.course-subtext {
+  color: #16A496;
+  font-size: 200%;
+  font-style: italic;
+  padding: 10px 0px 20px 0px;
+}
+
+p.subject-description {
+  color: #16A496;
+  font-size: 140%;
+}
+
+span.subject-title {
+  color: #F05353;
+  font-weight: bold;
+}
+
+p.capstone_blog {
+  font-size: 120%;
+}
+
 .calendar {
   background: #FFFFFF;
   padding: 10px;
@@ -85,4 +124,18 @@ body {
 
 .fc-unthemed .fc-today {
   background-color: #AFDFE0;
+}
+
+///////////////////// Students /////////////////////////////
+
+.row-margin {
+  margin-top: 50px;
+}
+
+textarea#student_emails {
+  height: 200px;
+}
+
+table.student {
+  background: #AFDFE0;
 }

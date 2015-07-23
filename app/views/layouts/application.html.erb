@@ -8,6 +8,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="main container">
+  <% flash.each do |name, message| %>
+    <div class="alert alert-<%= name %> alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</span><span class="sr-only">Close</span></button>
+      <%= message %>  
+    </div>
+  <% end %>
+</div>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,8 +35,13 @@
         <li><%= link_to "Curriculum & Schedule", classes_path  %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign In</a></li>
-        <li><a href="#">Sign Out</a></li>
+        <% if current_user %>
+          <li><%= link_to "Student Accounts", students_path if current_user.is_admin? %></li>
+          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>  
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+        <% end %>  
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

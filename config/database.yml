@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: student_portal_production
-  username: student_portal
-  password: <%= ENV['STUDENT_PORTAL_DATABASE_PASSWORD'] %>
+  database: student_portal-production
