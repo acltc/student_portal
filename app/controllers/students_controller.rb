@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_admin_user!
   
   def index
-    @students = User.where(is_admin?: false)
+    @students = User.where(role_id: 3)
   end
 
   def new
@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
     successful_creates = []
     errors = []
     student_emails.each do |student_email|
-      new_student = User.new(email: student_email, password: "changeme", is_admin?: false)
+      new_student = User.new(email: student_email, password: "changeme", role_id: 3)
       if new_student.save
         successful_creates << new_student.email
       else

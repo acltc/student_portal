@@ -33,10 +33,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "Curriculum & Schedule", classes_path  %></li>
+        <li><%= link_to "Prework", assignments_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li><%= link_to "Student Accounts", students_path if current_user.is_admin? %></li>
+          <li><%= link_to "Student Accounts", students_path unless current_user.role.category == "student" %></li>
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         <% else %>  

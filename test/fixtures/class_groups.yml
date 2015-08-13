@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week_one_due_date: 2015-08-11
+  week_two_due_date: 2015-08-11
+  week_three_due_date: 2015-08-11
+  instructor_id: 1
+
+two:
+  week_one_due_date: 2015-08-11
+  week_two_due_date: 2015-08-11
+  week_three_due_date: 2015-08-11
+  instructor_id: 1

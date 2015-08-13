@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722184836) do
+ActiveRecord::Schema.define(version: 20150811203308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "week"
+    t.text     "question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "class_groups", force: :cascade do |t|
+    t.date     "week_one_due_date"
+    t.date     "week_two_due_date"
+    t.date     "week_three_due_date"
+    t.integer  "instructor_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "pages", force: :cascade do |t|
     t.text     "welcome_message"
@@ -22,6 +38,20 @@ ActiveRecord::Schema.define(version: 20150722184836) do
     t.text     "blog"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "assignment_id"
+    t.text     "answer"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,7 +67,8 @@ ActiveRecord::Schema.define(version: 20150722184836) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.boolean  "is_admin?"
+    t.integer  "role_id"
+    t.integer  "class_group_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

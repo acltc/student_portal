@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_admin_user!
-    redirect_to root_path unless current_user && current_user.is_admin?
+    redirect_to root_path unless current_user || current_user.role.category == "student"
   end
 end
