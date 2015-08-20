@@ -1,8 +1,8 @@
 class AssignmentsController < ApplicationController
 
   def index
-    @assignments = Assignment.all
-    @class_group = current_user.class_group
+    @assignments = current_user.cohort.assignments
+    @cohort = current_user.cohort
   end
 
   def show

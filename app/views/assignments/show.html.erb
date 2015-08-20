@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div ng-controller="submissionsCtrl" ng-init="setup(<%= params[:id] %>)">
+    <div class="col-md-8 white">
+
+      <tabset justified="true">
+        <tab heading="Comments">
+          <div>
+            <pre>{{ lastSubmission.answer }}</pre>
+            <div ng-repeat="comment in lastSubmission.comments">
+              <div class="row comments">
+                <div class="col-md-3 author-info" ng-class="comment.user.role_id === 2 ? 'instructor-class' : 'not-instructor-class'">
+                  <div> <span ng-if="comment.user.role_id === 2">Instructor: </span> {{ comment.user.email }}</div>
+                  <div>{{ comment.created_at }} </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="comment-box">
+                    {{ comment.text }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <textarea ng-model="commentText" class="form-control"></textarea>
+          <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
+        </tab>
+        <tab heading="Submit/Update Solution">
+          <div>
+            <pre>{{ lastSubmission.answer }}</pre>
+          </div>
+          <textarea ng-model="submissionText" class="form-control submission-box"></textarea>
+          <button ng-click="submitText(submissionText)" class="btn btn-primary"> Submit / Update Text</button>
+        </tab>
+        <tab heading="History">
+          <div ng-repeat="submission in submissions">
+            <pre>{{ submission.answer }}</pre>
+            <div class="submitted-date">
+              Submitted {{ submission.created_at}}
+            </div>
+          </div>
+        </tab>
+      </tabset>
+
+      <!-- <button ng-click="submitText(submissionText)" class="btn btn-primary btn-lg"> See Submission History</button> -->
+      
+    </div>
+  </div>
+</div>

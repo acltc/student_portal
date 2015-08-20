@@ -1,0 +1,46 @@
+(function () {
+  "use strict";
+
+  angular.module("app").controller("submissionsCtrl", function($scope, $http) {
+
+  // $scope.tabs = [
+  //   { title:'Dynamic Title 1', content:'Dynamic content 1' },
+  //   { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+  // ];
+
+  $scope.setup = function(id) {
+    $scope.id = id;
+    $http.get('/api/v1/submissions?id='+id).then(function(response) {
+      $scope.submissions = response.data;
+      $scope.lastSubmission = $scope.submissions[$scope.submissions.length - 1];
+      $scope.submissionText = $scope.lastSubmission.answer;
+    }, function(response) {
+
+    });
+  }
+
+  $scope.submitText = function(text) {
+    $http.post('/api/v1/submissions?id='+$scope.id, {'submission_text': text}).then(function(response) {
+      $scope.lastSubmission.answer = text;
+      $scope.submissionText = text;
+    }, function(response) {
+
+    });
+
+  }
+
+  $scope.submitCommentText = function(text) {
+    var comment = {
+      'comment_text': text,
+      'submission_id': $scope.lastSubmission.id
+     };
+    $http.post('/api/v1/comments', comment).then(function(response) {
+      console.log("worked");
+    }, function(response) {
+    });
+  }
+
+  window.scope = $scope;
+
+  });
+})();

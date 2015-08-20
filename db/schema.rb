@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811203308) do
+ActiveRecord::Schema.define(version: 20150820231304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,24 @@ ActiveRecord::Schema.define(version: 20150811203308) do
     t.text     "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "cohort_id"
   end
 
-  create_table "class_groups", force: :cascade do |t|
-    t.date     "week_one_due_date"
-    t.date     "week_two_due_date"
-    t.date     "week_three_due_date"
+  create_table "cohorts", force: :cascade do |t|
     t.integer  "instructor_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.date     "start_date"
+    t.integer  "location_id"
+    t.string   "nickname"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "submission_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -68,7 +77,7 @@ ActiveRecord::Schema.define(version: 20150811203308) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role_id"
-    t.integer  "class_group_id"
+    t.integer  "cohort_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

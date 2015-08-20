@@ -157,3 +157,41 @@ table.student {
   border: 2px solid #000000;
   margin-bottom: 20px;
 }
+
+textarea.submission-box {
+  height: 600px;
+}
+
+textarea.comment-box {
+  height: 200px;
+}
+
+.submitted-date {
+  margin: -3px 0 15px 0;
+  color: #16A496;
+}
+
+.comment-box {
+  background: #F5F5F5;
+  border: 1px solid #DDDDDD;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 5px;
+  // padding: 20px 10px 10px 10px;
+}
+
+.author-info {
+  text-align: right;
+}
+
+.not-instructor-class {
+  color: green;
+}
+
+.instructor-class {
+  color: red;
+}
+
+.comments {
+  margin-top: 10px;
+}

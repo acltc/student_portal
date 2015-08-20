@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :submissions
   has_many :assignments, through: :submissions
   belongs_to :role
-  belongs_to :class_group
+  belongs_to :cohort
+  has_many :comments
 
 end

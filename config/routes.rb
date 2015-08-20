@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations' }
   root 'pages#index'
-  resources :classes
+  get '/curriculum' => 'curriculum#index'
+  resources :cohorts
   resources :students
   resources :assignments
+  namespace :api do
+    namespace :v1 do
+      resources :submissions, format: "json"
+      resources :comments, format: "json"
+    end
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

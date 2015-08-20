@@ -1,0 +1,15 @@
+class Api::V1::SubmissionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
+  def index
+    @submissions = current_user.submissions.where(assignment_id: params[:id]).includes(:comments) || Submission.new(answer: "Nothing Submitted")
+  end
+
+  def create
+    @submission = Submission.new(user_id:current_user.id, assignment_id: params[:id], answer:params[:submission_text])
+    if @submission.save
+      render :index
+    else
+    end
+  end
+end

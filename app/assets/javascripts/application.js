@@ -17,6 +17,7 @@
 //= require app
 //= require moment
 //= require fullcalendar
+//= require ui-bootstrap.min
 //= require gcal
 //= require calendar
 //= require_tree .
