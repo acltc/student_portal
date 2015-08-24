@@ -8,15 +8,27 @@
   //   { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
   // ];
 
-  $scope.setup = function(id) {
+  $scope.setup = function(id, student_id) {
     $scope.id = id;
-    $http.get('/api/v1/submissions?id='+id).then(function(response) {
+    $http.get('/api/v1/submissions?id='+id+'&student_id='+student_id).then(function(response) {
       $scope.submissions = response.data;
       $scope.lastSubmission = $scope.submissions[$scope.submissions.length - 1];
       $scope.submissionText = $scope.lastSubmission.answer;
+      $scope.getComments();
     }, function(response) {
 
     });
+  }
+
+  $scope.getComments = function() {
+    $scope.comments = [];
+    for (var i = 0; i < $scope.submissions.length; i++) {
+      if ($scope.submissions[i].comments[0] != null) {
+        for (var j = 0; j < $scope.submissions[i].comments.length; j++) {
+          $scope.comments.push($scope.submissions[i].comments[j]);
+        };
+      }; 
+    }
   }
 
   $scope.submitText = function(text) {
@@ -35,7 +47,8 @@
       'submission_id': $scope.lastSubmission.id
      };
     $http.post('/api/v1/comments', comment).then(function(response) {
-      console.log("worked");
+      var comment = response.data;
+      $scope.comments.push(comment);
     }, function(response) {
     });
   }

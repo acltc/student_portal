@@ -10,4 +10,24 @@ class User < ActiveRecord::Base
   belongs_to :cohort
   has_many :comments
 
+
+  def instructor
+    true if role.category == "instructor"
+  end
+
+  def administrator
+    true if role.category == "administrator"
+  end
+
+  def instructor_or_administrator
+    true if role.category == "instructor" || role.category == "administrator"
+  end
+
+  def student
+    true if role.category == "student"
+  end
+
+
+
+
 end
