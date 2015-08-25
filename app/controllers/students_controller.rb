@@ -1,9 +1,4 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_admin_user!
-  
-  def index
-    @students = User.where(role_id: 3)
-  end
 
   def new
   end
@@ -13,7 +8,7 @@ class StudentsController < ApplicationController
     successful_creates = []
     errors = []
     student_emails.each do |student_email|
-      new_student = User.new(email: student_email, password: "changeme", role_id: 3)
+      new_student = User.new(cohort_id: params[:cohort_id], email: student_email, password: "changeme", role_id: 3)
       if new_student.save
         successful_creates << new_student.email
       else
@@ -22,7 +17,6 @@ class StudentsController < ApplicationController
     end
     flash[:success] = "Account(s) for #{successful_creates.join(",")} created successfully" if successful_creates.any?
     flash[:danger] = errors.join("; ").html_safe if errors.any?
-    redirect_to students_path
+    redirect_to cohorts_path
   end
-
 end

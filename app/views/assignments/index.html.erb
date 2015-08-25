@@ -3,7 +3,7 @@
 </div>
 <div class="row message">
   <div class="col-md-7">
-    <p><span class="prework-important">Prework is mandatory. You will not be allowed to start the program if you do not complete the Prework.</span> Give yourself plenty of time to complete the prework. If you're stuck and you just can't figure something out, reach out to your instructor: <%= mail_to @cohort.instructor.email %>.</p>
+    <p><span class="prework-important">Prework is mandatory. You will not be allowed to start the program if you do not complete the Prework.</span> Give yourself plenty of time to complete the prework. If you're stuck and you just can't figure something out, reach out to your instructor <b><%= @cohort.instructor.full_name  %></b> (<%= mail_to @cohort.instructor.email %>).</p>
     <p>View and Submit assignments below.</p>
   </div>
   <div class="col-md-5">
@@ -11,15 +11,15 @@
       <table class="table">
         <tr>
           <td>Week 1 Prework Assignment</td>
-          <td><%= @cohort.start_date + 4 %></td>
+          <td>Due: <%= @cohort.start_date + 4 %></td>
         </tr>
         <tr>
           <td>Week 2 Prework Assignment</td>
-          <td><%= @cohort.start_date + 11 %></td>
+          <td>Due: <%= @cohort.start_date + 11 %></td>
         </tr>
         <tr>
           <td>Week 3 Prework Assignment</td>
-          <td><%= @cohort.start_date + 18 %></td>
+          <td>Due: <%= @cohort.start_date + 18 %></td>
         </tr>
       </table>
     </div>
@@ -39,7 +39,7 @@
         <% @assignments.each do |assignment| %>
         <tr>
           <td><%= assignment.week %></td>
-          <td><%= link_to assignment.question, "assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
+          <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
           <td><%= assignment.submissions.where("submissions.user_id": current_user.id).first ? "Submitted" : "Not Submitted" %></td>
         </tr>
         <% end %>

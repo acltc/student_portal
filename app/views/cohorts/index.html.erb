@@ -1,22 +1,52 @@
   <div class="row row-margin">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-
-  <table class="table table-striped table-bordered student">
-    <thead>
-      <tr>
-        <th>Email Address</th>
-        <th>Created At</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @students.each do |student| %>
-        <tr>
-          <td><%= student.email %></td>
-          <td><%= student.created_at.strftime("%A, %d %b %Y %l:%M %p") %></td>
-        </tr>
+    <div class="col-md-2 white">
+      <p><%= link_to "Create Cohort", new_cohort_path %></p> 
+      <p><%= link_to "Show All", cohorts_path %></p> 
+      <% User.where(role_id:2).each do |instructor| %>
+        <p>Filter by: <%= link_to instructor.full_name, "/cohorts?instructor_id=#{instructor.id}" %></p>
       <% end %>
-    </tbody>
-  </table>
-
-  </div>
+    </div>
+      <div class="col-md-10">
+        <% @cohorts.each do |cohort| %>
+          <div class="white">
+            <%= link_to "Edit", edit_cohort_path(cohort) %>
+            <div class="row">
+              <div class="col-md-3 text-left">
+                <h4>Instructor: <%= cohort.instructor.full_name %></h4>
+              </div>
+              <div class="col-md-3 text-left">
+                <h4>Start Date: <%= cohort.start_date.strftime("%d %b %Y") %></h4>
+              </div>
+              <div class="col-md-3 text-right">
+                <h4><%= cohort.location.name %></h4>
+              </div>
+              <div class="col-md-3 text-right">
+                <h4><%= cohort.nickname %></h4>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Email Address</th>
+                  <th>Prework (Last Submission)</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Student Added</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cohort.users.each do |student| %>
+                <tr>
+                  <td><%= student.email %></td>
+                  <td><%= link_to (student.submissions.any? ? student.submissions.last.updated_at.strftime("%d %b %Y %l:%M %p") : "Nothing Submitted"), "/assignments/?student_id=#{student.id}" %></td>
+                  <td><%= link_to "Edit", "students/#{student.id}/edit" %></td>
+                  <td><%= link_to "Delete", "students/#{student.id}/edit" %></td>
+                  <td><%= student.created_at.strftime("%d %b %Y %l:%M %p") %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= link_to "Add Students", "/students/new?cohort_id=#{cohort.id}", class:"btn btn-success" %>
+          </div>
+        <% end %>
+      </div>

@@ -37,7 +37,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li><%= link_to "Cohort Dashboard", students_path unless current_user.role.category == "student" %></li>
+          <li><%= link_to "Cohort Dashboard", cohorts_path unless current_user.role.category == "student" %></li>
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         <% else %>  
