@@ -8,7 +8,7 @@ class AssignmentsController < ApplicationController
     else #instructor or admin
       @student = User.find(params[:student_id])
       @cohort = @student.cohort
-      @assignments = @cohort.assignments
+      @assignments = @cohort.assignment_version.assignments
     end
   end
 

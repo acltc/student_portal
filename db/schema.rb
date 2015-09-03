@@ -11,28 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825165704) do
+ActiveRecord::Schema.define(version: 20150903155906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "assignment_versions", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "assignments", force: :cascade do |t|
     t.integer  "week"
     t.text     "question"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "cohort_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "youtube_id"
     t.string   "title"
+    t.integer  "assignment_version_id"
   end
 
   create_table "cohorts", force: :cascade do |t|
     t.integer  "instructor_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.date     "start_date"
     t.integer  "location_id"
     t.string   "nickname"
+    t.integer  "assignment_version_id"
   end
 
   create_table "comments", force: :cascade do |t|
