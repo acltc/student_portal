@@ -4,11 +4,11 @@ class AssignmentsController < ApplicationController
     if current_user.role_id == 3 #student
       @student = current_user
       @cohort = current_user.cohort
-      @assignments = current_user.cohort.assignments
+      @assignments = current_user.cohort.assignments.order(:id)
     else #instructor or admin
       @student = User.find(params[:student_id])
       @cohort = @student.cohort
-      @assignments = @cohort.assignment_version.assignments
+      @assignments = @cohort.assignment_version.assignments.order(:id)
     end
   end
 
@@ -35,7 +35,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:title, :question)
+    params.require(:assignment).permit(:title, :question, :youtube_id)
   end
 
 end

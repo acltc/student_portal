@@ -40,6 +40,10 @@ body {
   margin: 0% 5% 0% 5%;
 }
 
+.warning {
+  color: red;
+}
+
 /////////////////// NavBar //////////////////////////
 
 
@@ -259,4 +263,8 @@ textarea#assignment_question {
 
 pre {
     white-space: pre-line;
+}
+
+.tab-heading {
+  padding:10px 5px 10px 5px;
 }
