@@ -12,4 +12,4 @@
 !/log/.keep
 /tmp
 .env
-/assets/pdf
+app/assets/pdf
