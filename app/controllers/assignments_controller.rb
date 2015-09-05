@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
     if current_user.role_id == 3 #student
       @student = current_user
       @cohort = current_user.cohort
-      @assignments = current_user.cohort.assignments.order(:id)
+      @assignments = current_user.cohort.assignment_version.assignments.order(:id)
     else #instructor or admin
       @student = User.find(params[:student_id])
       @cohort = @student.cohort
