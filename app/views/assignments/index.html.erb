@@ -46,7 +46,7 @@
             <% @assignments.where(week:1).each do |assignment| %>
             <tr>
               <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
-              <td><%= assignment.submissions.where("submissions.user_id": current_user.id).first ? "Submitted" : "Not Submitted" %></td>
+              <td>?</td>
             </tr>
             <% end %>
           </table>
@@ -64,7 +64,7 @@
             <% @assignments.where(week:2).each do |assignment| %>
             <tr>
               <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
-              <td><%= assignment.submissions.where("submissions.user_id": current_user.id).first ? "Submitted" : "Not Submitted" %></td>
+              <td>?</td>
             </tr>
             <% end %>
           </table>
@@ -83,7 +83,7 @@
             <% @assignments.where(week:3).each do |assignment| %>
             <tr>
               <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
-              <td><%= assignment.submissions.where("submissions.user_id": current_user.id).first ? "Submitted" : "Not Submitted" %></td>
+              <td>?</td>
             </tr>
             <% end %>
           </table>
