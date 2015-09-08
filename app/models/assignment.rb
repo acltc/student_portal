@@ -8,7 +8,7 @@ class Assignment < ActiveRecord::Base
     s3 = Aws::S3::Client.new(region:'us-west-2', credentials: credentials)
     Aws::S3::Object.new(
         key: 'learn-to-program_p4_0.pdf',
-        bucket_name: 'acltc-student-portal',
+        bucket_name: ENV['S3_BUCKET_NAME'],
         client: s3
     ).presigned_url(:get, expires_in: 60 * 60)
   end
