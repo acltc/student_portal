@@ -9,6 +9,7 @@ class AssignmentsController < ApplicationController
       @student = User.find(params[:student_id])
       @cohort = @student.cohort
       @assignments = @cohort.assignment_version.assignments.order(:id)
+      
     end
   end
 
