@@ -27,6 +27,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  <th>Name</th>
                   <th>Email Address</th>
                   <th>Prework (Last Submission)</th>
                   <th>Edit</th>
@@ -37,6 +38,7 @@
               <tbody>
                 <% cohort.users.each do |student| %>
                 <tr>
+                  <td><%= student.full_name %></td>
                   <td><%= student.email %></td>
                   <td><%= link_to (student.submissions.any? ? student.submissions.last.updated_at.strftime("%d %b %Y %l:%M %p") : "Nothing Submitted"), "/assignments/?student_id=#{student.id}" %></td>
                   <td><%= link_to "Edit", "students/#{student.id}/edit" %></td>

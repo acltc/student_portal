@@ -12,9 +12,13 @@
     $scope.id = id;
     $http.get('/api/v1/submissions?id='+id+'&student_id='+student_id).then(function(response) {
       $scope.submissions = response.data;
-      $scope.lastSubmission = $scope.submissions[$scope.submissions.length - 1];
-      $scope.submissionText = $scope.lastSubmission.answer;
-      $scope.getComments();
+      if($scope.submissions.length > 0) {
+        $scope.lastSubmission = $scope.submissions[$scope.submissions.length - 1];
+        $scope.submissionText = $scope.lastSubmission.answer;
+        $scope.getComments();
+      } else {
+
+      }
     }, function(response) {
 
     });
@@ -33,6 +37,7 @@
 
   $scope.submitText = function(text) {
     $http.post('/api/v1/submissions?id='+$scope.id, {'submission_text': text}).then(function(response) {
+      $scope.lastSubmission = {};
       $scope.lastSubmission.answer = text;
       $scope.submissionText = text;
     }, function(response) {
