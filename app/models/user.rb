@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   belongs_to :cohort
   has_many :comments
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
 
   def instructor
     true if role.category == "instructor"

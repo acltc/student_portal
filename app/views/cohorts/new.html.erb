@@ -17,7 +17,11 @@
     <div class="form-group">
       <%= f.label :instructor %>
       <%= f.collection_select :instructor_id, User.where(role_id:2), :id, :full_name %>
-    </div>  
+    </div>
+    <div class="form-group">
+      <%= f.label :assignment_version %>
+      <%= f.collection_select :assignment_version_id, AssignmentVersion.all, :id, :description %>
+    </div>    
     <div class="form-group">
       <%= f.submit "Create Cohort", class: "btn btn-success" %>
     </div>

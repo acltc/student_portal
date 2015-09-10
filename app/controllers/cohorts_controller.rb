@@ -3,9 +3,9 @@ class CohortsController < ApplicationController
   
   def index
     if params[:instructor_id]
-      @cohorts = Cohort.where(instructor_id: params[:instructor_id])
+      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).includes(:users).order("users.last_name")
     else
-      @cohorts = Cohort.all.includes(:users)
+      @cohorts = Cohort.all.includes(:users).order("users.last_name")
     end
   end
 
@@ -32,16 +32,17 @@ class CohortsController < ApplicationController
   def update
     @cohort = Cohort.find(params[:id])
     if @cohort.update(cohort_params)
-      flash[:success] = "Cohort updated."
+      flash.now[:success] = "Cohort updated."
       render :show
     else
+      render :edit
     end
   end
 
   private
 
   def cohort_params
-    params.require(:cohort).permit(:instructor_id, :location_id, :nickname, :start_date)
+    params.require(:cohort).permit(:instructor_id, :location_id, :assignment_version_id, :nickname, :start_date)
   end
 
 

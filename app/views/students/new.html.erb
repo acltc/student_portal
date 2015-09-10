@@ -1,15 +1,24 @@
 <div class="row row-margin">
   <div class="col-md-2"></div>
   <div class="col-md-8">
+  <h2>Add Students to this Cohort:</h2>
+  <h4>Instructor: <%= @cohort.instructor.full_name %><br/>
+    Start Date: <%= @cohort.start_date %><br/>
+    Cohort Nickname: <%= @cohort.nickname %>
+  </h4>
   <%= form_tag students_path do %>
     <div class="form-group">
-      <%= label_tag :student_emails, "Enter all new student email addresses." %><br />
-      <%= text_area_tag :student_emails, nil, class: "form-control" %>
-      <p class="help-block">Seperate by a comma.</p>
+      <%= label_tag :student_details, "One each line, enter each students first name, last name, and email seperated by a comma." %><br/>
+      <%= text_area_tag :student_details, nil, class: "form-control" %>
+      <p class="help-block"><i>For example:</i><br/>
+        John, Smith, jsmith@gmail.com<br/>
+        Jane, Doe, jdoe@yahoo.com<br/>
+        Yuri, Tanaka, yurit21@msn.com
+      </p>
     </div>
       <%= hidden_field_tag :cohort_id, params[:cohort_id] %>
     <div class="form-group">
-      <%= submit_tag "Create Accounts", class: "btn btn-primary btn-lg" %>
+      <%= submit_tag "Create Accounts", class: "btn btn-primary" %>
     </div>
   <% end %>
   </div>

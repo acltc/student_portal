@@ -173,12 +173,16 @@ p.capstone_blog {
   margin-top: 50px;
 }
 
-textarea#student_emails {
-  height: 200px;
+textarea#student_details {
+  height: 300px;
 }
 
 table.student {
   background: #AFDFE0;
+}
+
+.modal-body {
+  color: red;
 }
 
 

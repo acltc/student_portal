@@ -9,19 +9,14 @@
       <div class="col-md-10">
         <% @cohorts.each do |cohort| %>
           <div class="white">
-            <%= link_to "Edit", edit_cohort_path(cohort) %>
             <div class="row">
-              <div class="col-md-3 text-left">
-                <h4>Instructor: <%= cohort.instructor.full_name %></h4>
-              </div>
-              <div class="col-md-3 text-left">
-                <h4>Start Date: <%= cohort.start_date.strftime("%d %b %Y") %></h4>
-              </div>
-              <div class="col-md-3 text-right">
-                <h4><%= cohort.location.name %></h4>
-              </div>
-              <div class="col-md-3 text-right">
-                <h4><%= cohort.nickname %></h4>
+              <div class="col-md-12">
+                <h4>Instructor: <%= cohort.instructor.full_name %></br>
+                  Start Date: <%= cohort.start_date.strftime("%d %b %Y") %></br>
+                  Location: <%= cohort.location.name %></br>
+                  Cohort Nickname: <%= cohort.nickname %></br>
+                  <%= link_to "Edit", edit_cohort_path(cohort) %>
+                </h4>
               </div>
             </div>
             <table class="table table-bordered">
@@ -42,7 +37,11 @@
                   <td><%= student.email %></td>
                   <td><%= link_to (student.submissions.any? ? student.submissions.last.updated_at.strftime("%d %b %Y %l:%M %p") : "Nothing Submitted"), "/assignments/?student_id=#{student.id}" %></td>
                   <td><%= link_to "Edit", "students/#{student.id}/edit" %></td>
-                  <td><%= link_to "Delete", "students/#{student.id}/edit" %></td>
+                  <td>
+                    <%= link_to "Delete", student_path(student), method: "delete", data: {confirm: "Are you sure? #{student.full_name}'s account and all their prework submitted will be deleted."} %>
+         <!--            <a data-confirm="Are you sure?" data-method="delete" href="/students/<%= student.id %>" rel="nofollow">Delete</a> -->
+
+                  </td>
                   <td><%= student.created_at.strftime("%d %b %Y %l:%M %p") %></td>
                 </tr>
                 <% end %>

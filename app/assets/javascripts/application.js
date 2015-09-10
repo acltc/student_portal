@@ -13,6 +13,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require twitter/bootstrap/rails/confirm
 //= require angular
 //= require app
 //= require moment

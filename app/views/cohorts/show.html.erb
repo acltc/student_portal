@@ -1,10 +1,13 @@
 <div class="row row-margin">
-  <div class="col-md-2"></div>
-  <div class="col-md-8 white">
-    <p>Nickname: <%= @cohort.nickname %></p>  
-    <p>Start Date: <%= @cohort.start_date.strftime("%d %b %Y") %></p>  
-    <p>Instructor: <%= @cohort.instructor.full_name %></p>
-    <p><%= link_to "Edit", edit_cohort_path(@cohort) %></p>
+  <div class="col-md-2 white">
+    <p><%= link_to "Cohorts", cohorts_path %></p>
   </div>
-<div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="white">
+      <p>Nickname: <%= @cohort.nickname %></p>  
+      <p>Start Date: <%= @cohort.start_date.strftime("%d %b %Y") %></p>  
+      <p>Instructor: <%= @cohort.instructor.full_name %></p>
+      <p><%= link_to "Edit", edit_cohort_path(@cohort) %></p>
+    </div>
+  </div>
 </div>

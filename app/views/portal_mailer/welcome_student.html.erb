@@ -1,0 +1,11 @@
+<p>Dear <%= @student.full_name %>,</p>
+<p>Welcome to the ACLTC Student Portal. Here you'll be able to:<br>
+  View the curriculum<br/>
+  View your class schedule<br/>
+  View the prework<br/>
+  Submit solutions to the Prework<br/>
+</p>
+<p>To login, go to <%= "https://#{ENV['DOMAIN']}/users/sign_in" %> to be taken to the Student Portal. Sign in with your email address <%= @student.email %> and the default password is "changeme"; please change this to a more secure password after logging in for the first time.</p>
+<p>Cheers,<br/>
+ACLTC Team
+</p>
