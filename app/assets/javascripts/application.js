@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap/rails/confirm
 //= require angular
+//= require ng-file-upload
 //= require app
 //= require moment
 //= require fullcalendar

@@ -25,11 +25,6 @@
       <div class="white">
         <h2>Solution</h2>
         <tabset justified="true">
-          <tab heading="Solution">
-            <pre>
-              <pre>{{ lastSubmission.answer }}</pre>
-            </pre>
-          </tab>
           <tab heading="Submit/Update Solution">
             <div>
               <pre>{{ lastSubmission.answer }}</pre>
@@ -46,6 +41,19 @@
             </div>
           </tab>
         </tabset>
+        <div class="uploaded-files" >
+          <table class="table">
+          <tr>
+            <th>File Name</th>
+            <th>Delete</th>
+          </tr>
+          <tr ng-repeat="file in files track by $index">
+            <td>{{ file.name }}</td>
+            <td>{{ file.size }}</td>
+          </tr>
+          </table>
+         </div>
+        <div class="btn btn-primary" ngf-select="uploadFiles($files)" multiple="multiple">Upload on file select</div>
       </div>
       <div class="white">
         <h2>Comments</h2>

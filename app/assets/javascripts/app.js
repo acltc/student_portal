@@ -2,6 +2,6 @@
   "use strict";
 
   // angular.module("app", ["ui.calendar"])
-  angular.module("app", ['ui.calendar', 'ui.bootstrap']);
+  angular.module("app", ['ui.calendar', 'ui.bootstrap', 'ngFileUpload']);
 
 }());

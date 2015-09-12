@@ -6,9 +6,9 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = Submission.new(user_id:current_user.id, assignment_id: params[:id], answer:params[:submission_text])
+    @submission = Submission.new(user_id:current_user.id, assignment_id: params[:id], answer:params[:submission_text], solution: params[:file])
     if @submission.save
-      render :index
+      render json: '200'
     else
     end
   end

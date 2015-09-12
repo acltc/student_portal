@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  before_action :authenticate_admin_user!
 
   def new
     @cohort = Cohort.find(params[:cohort_id])

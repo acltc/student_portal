@@ -32,6 +32,8 @@ gem "rails-erd", group: :development
 gem 'seed_dump'
 gem 'aws-sdk'
 gem 'twitter-bootstrap-rails-confirm'
+gem 'carrierwave'
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

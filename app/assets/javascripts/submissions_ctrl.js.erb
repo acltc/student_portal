@@ -1,12 +1,7 @@
 (function () {
   "use strict";
 
-  angular.module("app").controller("submissionsCtrl", function($scope, $http) {
-
-  // $scope.tabs = [
-  //   { title:'Dynamic Title 1', content:'Dynamic content 1' },
-  //   { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  // ];
+  angular.module("app").controller("submissionsCtrl", function($scope, $http, Upload) {
 
   $scope.setup = function(id, student_id) {
     $scope.id = id;
@@ -22,6 +17,22 @@
     }, function(response) {
 
     });
+  }
+
+  $scope.files = [];
+
+  $scope.uploadFiles = function (files) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      $scope.upload = Upload.upload({
+        url: '/api/v1/submissions',
+        method: 'POST',
+        fields: {'id': $scope.id},
+        file: file,
+        fileFormDataName: 'submission[solution]'
+      });     
+      $scope.files.push(file);
+    }
   }
 
   $scope.getComments = function() {
@@ -50,7 +61,7 @@
     var comment = {
       'comment_text': text,
       'submission_id': $scope.lastSubmission.id
-     };
+    };
     $http.post('/api/v1/comments', comment).then(function(response) {
       var comment = response.data;
       $scope.comments.push(comment);
@@ -60,5 +71,5 @@
 
   window.scope = $scope;
 
-  });
+});
 })();
