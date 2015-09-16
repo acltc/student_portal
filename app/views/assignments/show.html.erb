@@ -29,11 +29,14 @@
             <div ng-if="texts[texts.length - 1].answer">
               <pre>{{ texts[texts.length - 1].answer }}</pre>
             </div>
-            <textarea ng-model="submissionText" class="form-control submission-box"></textarea>
-            <button ng-click="submitText(submissionText)" class="btn btn-primary"> Submit / Update Text</button>
+            <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution here ***"></textarea>
+            <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit / Update Text</button>
           </tab>
           <tab heading="History">
-          <div class="history-box">
+            <div class="history-box">
+              <div ng-show="submissions.length === 0">
+                *** There have been no submissions yet. ***
+              </div>
               <div ng-repeat="submission in submissions">
                 <div ng-if="submission.answer">
                   <pre>{{ submission.answer }}</pre>

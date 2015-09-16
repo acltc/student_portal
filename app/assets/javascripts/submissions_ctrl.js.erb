@@ -5,6 +5,7 @@
     $scope.texts = [];
     $scope.files = [];
     $scope.comments = [];
+    $scope.submittedText = {text: null};
 
     $scope.setup = function(assignment_id, student_id) {
       $scope.assignment_id = assignment_id;
@@ -93,6 +94,7 @@
           };
           $scope.submissions.push(text);
           $scope.texts.push(text);
+          $scope.submittedText.text = null;
         }, function(response) {
 
         });
