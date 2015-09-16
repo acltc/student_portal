@@ -85,7 +85,7 @@
 
     $scope.submitText = function(text) {
       if (text && text.length != 0) {
-        $http.post('/api/v1/submissions?id='+$scope.assignment_id, {submission_text: text, student_id: $scope.student_id}).then(function(response) {
+        $http.post('/api/v1/submissions?assignment_id='+$scope.assignment_id, {submission_text: text, student_id: $scope.student_id}).then(function(response) {
           var text = {
             id: response.data.id,
             answer: response.data.answer,
