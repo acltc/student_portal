@@ -36,7 +36,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:title, :question, :youtube_id)
+    params.require(:assignment).permit(:title, :question, :youtube_id, :attachment)
   end
 
 end

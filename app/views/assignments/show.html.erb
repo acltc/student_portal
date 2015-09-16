@@ -2,7 +2,8 @@
   <div class="row row-margin">
     <div class="col-md-2">
       <div class="white">
-        <%= link_to "Assignment List", "/assignments/?student_id=#{@student.id}" %>
+        <%= link_to "Assignment List", "/assignments/?student_id=#{@student.id}" %><br/>
+        <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}" if current_user.instructor_or_administrator %>
       </div>
     </div>
     <div class="col-md-10">
@@ -19,48 +20,60 @@
             <%= @assignment.question %>
           </pre>
         </div>
-        <%= link_to "Edit", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}", class: "btn btn-warning" if current_user.instructor_or_administrator %>
       </div>
 
       <div class="white">
-        <h2>Solution</h2>
-        <tabset justified="true">
+        <h2><%= @student.full_name %>'s Solution</h2>
+        <tabset class="tab-box" justified="true">
           <tab heading="Submit/Update Solution">
-            <div>
-              <pre>{{ lastSubmission.answer }}</pre>
+            <div ng-if="texts[texts.length - 1].answer">
+              <pre>{{ texts[texts.length - 1].answer }}</pre>
             </div>
             <textarea ng-model="submissionText" class="form-control submission-box"></textarea>
             <button ng-click="submitText(submissionText)" class="btn btn-primary"> Submit / Update Text</button>
           </tab>
           <tab heading="History">
-            <div ng-repeat="submission in submissions">
-              <pre>{{ submission.answer }}</pre>
-              <div class="submitted-date">
-                Submitted {{ submission.created_at}}
+          <div class="history-box">
+              <div ng-repeat="submission in submissions">
+                <div ng-if="submission.answer">
+                  <pre>{{ submission.answer }}</pre>
+                </div>
+                <div ng-if="submission.name">
+                  {{ submission.name }} uploaded
+                </div>
+                <div class="submitted-date">
+                  Submitted {{ submission.created_at}}
+                </div>
               </div>
             </div>
           </tab>
         </tabset>
-        <div class="uploaded-files" >
-          <table class="table">
-          <tr>
-            <th>File Name</th>
-            <th>Delete</th>
-          </tr>
-          <tr ng-repeat="file in files track by $index">
-            <td>{{ file.name }}</td>
-            <td>{{ file.size }}</td>
-          </tr>
-          </table>
-         </div>
-        <div class="btn btn-primary" ngf-select="uploadFiles($files)" multiple="multiple">Upload on file select</div>
+        <% if @assignment.attachment %>
+          <div>
+            <div ng-show="files.length" class="uploaded-files">
+              <table class="table">
+              <tr>
+                <th>Download</th>
+                <th>Uploaded At</th>
+                <th>Delete</th>
+              </tr>
+              <tr ng-repeat="file in files track by $index">
+                <td><a href="#" onClick="return false;" ng-click="downloadFile(file)">{{ file.name }}</a></td>
+                <td>{{ file.created_at }}</td>
+                <td><a href="#" onClick="return false;" ng-click="deleteFile(file)">Delete</a></td>
+              </tr>
+              </table>
+            </div>
+            <div class="btn btn-primary" ngf-select="uploadFiles($files)" multiple="multiple">Upload files</div>
+          </div>
+        <% end %>
       </div>
       <div class="white">
         <h2>Comments</h2>
           <div ng-repeat="comment in comments">
             <div class="row comments">
               <div class="col-md-3 author-info" ng-class="comment.user.role_id === 2 ? 'instructor-class' : 'not-instructor-class'">
-                <div> <span ng-if="comment.user.role_id === 2">Instructor: </span> {{ comment.user.email }}</div>
+                <div> <span ng-if="comment.user.role_id === 2">Instructor: </span> {{ comment.user.first_name + " " +comment.user.last_name }}</div>
                 <div>{{ comment.created_at }} </div>
               </div>
               <div class="col-md-9">

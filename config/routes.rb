@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :assignments
   namespace :api do
     namespace :v1 do
+      get 'submissions/download_file' => 'submissions#download_file'
       resources :submissions, format: "json"
       resources :comments, format: "json"
     end

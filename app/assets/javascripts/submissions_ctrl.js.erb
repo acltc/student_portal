@@ -2,74 +2,131 @@
   "use strict";
 
   angular.module("app").controller("submissionsCtrl", function($scope, $http, Upload) {
+    $scope.texts = [];
+    $scope.files = [];
+    $scope.comments = [];
 
-  $scope.setup = function(id, student_id) {
-    $scope.id = id;
-    $http.get('/api/v1/submissions?id='+id+'&student_id='+student_id).then(function(response) {
-      $scope.submissions = response.data;
-      if($scope.submissions.length > 0) {
-        $scope.lastSubmission = $scope.submissions[$scope.submissions.length - 1];
-        $scope.submissionText = $scope.lastSubmission.answer;
-        $scope.getComments();
-      } else {
+    $scope.setup = function(assignment_id, student_id) {
+      $scope.assignment_id = assignment_id;
+      $scope.student_id = student_id;
+      $http.get('/api/v1/submissions?assignment_id='+assignment_id+'&student_id='+student_id).then(function(response) {
+        $scope.submissions = response.data;
+        if($scope.submissions.length > 0) {
+          $scope.getFiles();
+          $scope.getTexts();
+        } 
+      }, function(response) {
+      });
+      $scope.getComments();
+    }
+
+    $scope.getComments = function() {
+      $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id).then(function(response) {
+        $scope.comments = response.data;
+      });
+    }
+
+    $scope.getFiles = function() {
+      for (var i = 0; i < $scope.submissions.length; i++) {
+        if ($scope.submissions[i].name) {
+          var file = {
+            id: $scope.submissions[i].id,
+            name: $scope.submissions[i].name,
+            created_at: $scope.submissions[i].created_at
+          };
+          $scope.files.push(file);
+        }
+      }
+    }
+
+    $scope.getTexts = function() {
+      for (var i = 0; i < $scope.submissions.length; i++) {
+        if ($scope.submissions[i].answer) {
+          var text = {
+            id: $scope.submissions[i].id,
+            answer: $scope.submissions[i].answer,
+            created_at: $scope.submissions[i].created_at
+          };
+          $scope.texts.push(text);
+        }
+      }   
+    }
+
+    $scope.uploadFiles = function(uploadingFiles) {
+      for (var i = 0; i < uploadingFiles.length; i++) {
+        var file = uploadingFiles[i];
+        $scope.upload = Upload.upload({
+          url: '/api/v1/submissions',
+          method: 'POST',
+          fields: {assignment_id: $scope.assignment_id, student_id: $scope.student_id},
+          file: file,
+          fileFormDataName: 'submission[solution]'
+        }).success(function (data, status, headers, config) {
+          var uploadedFile = {
+            id: data.id,
+            name: data.name,
+            created_at: data.created_at
+          };
+          $scope.files.push(uploadedFile);
+          $scope.submissions.push(uploadedFile);
+        });
 
       }
-    }, function(response) {
-
-    });
-  }
-
-  $scope.files = [];
-
-  $scope.uploadFiles = function (files) {
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      $scope.upload = Upload.upload({
-        url: '/api/v1/submissions',
-        method: 'POST',
-        fields: {'id': $scope.id},
-        file: file,
-        fileFormDataName: 'submission[solution]'
-      });     
-      $scope.files.push(file);
     }
-  }
 
-  $scope.getComments = function() {
-    $scope.comments = [];
-    for (var i = 0; i < $scope.submissions.length; i++) {
-      if ($scope.submissions[i].comments[0] != null) {
-        for (var j = 0; j < $scope.submissions[i].comments.length; j++) {
-          $scope.comments.push($scope.submissions[i].comments[j]);
-        };
-      }; 
+    $scope.deleteFile = function(file) {
+      $http.delete('/api/v1/submissions/'+file.id).then(function(response) {
+        var index = $scope.files.indexOf(file);
+        $scope.files.splice(index, 1)
+      });
     }
-  }
 
-  $scope.submitText = function(text) {
-    $http.post('/api/v1/submissions?id='+$scope.id, {'submission_text': text}).then(function(response) {
-      $scope.lastSubmission = {};
-      $scope.lastSubmission.answer = text;
-      $scope.submissionText = text;
-    }, function(response) {
 
-    });
 
-  }
+    $scope.submitText = function(text) {
+      if (text && text.length != 0) {
+        $http.post('/api/v1/submissions?id='+$scope.assignment_id, {submission_text: text, student_id: $scope.student_id}).then(function(response) {
+          var text = {
+            id: response.data.id,
+            answer: response.data.answer,
+            created_at: response.data.created_at
+          };
+          $scope.submissions.push(text);
+          $scope.texts.push(text);
+        }, function(response) {
 
-  $scope.submitCommentText = function(text) {
-    var comment = {
-      'comment_text': text,
-      'submission_id': $scope.lastSubmission.id
-    };
-    $http.post('/api/v1/comments', comment).then(function(response) {
-      var comment = response.data;
-      $scope.comments.push(comment);
-    }, function(response) {
-    });
-  }
+        });
+      }
+    }
 
-  window.scope = $scope;
+    $scope.submitCommentText = function(text) {
+      var comment = {
+        comment_text: text,
+        assignment_id: $scope.assignment_id,
+        student_id: $scope.student_id 
+      };
+      $http.post('/api/v1/comments', comment).then(function(response) {
+        var comment = response.data;
+        $scope.comments.push(comment);
+      }, function(response) {
+      });
+    }
 
-});
+    $scope.downloadFile = function(file) {
+      $http.get('/api/v1/submissions/download_file?id='+file.id+'&file_name='+file.name).then(function(response) {
+        var fileURL = response.data.url;
+        var a         = document.createElement('a');
+        a.href        = fileURL; 
+        a.target      = '_blank';
+        a.download    = 'test';
+        document.body.appendChild(a);
+        a.click();
+      }, function(response) {
+
+      });
+    }
+
+    window.scope = $scope;
+
+  });
 })();

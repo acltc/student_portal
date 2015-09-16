@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912170502) do
+ActiveRecord::Schema.define(version: 20150916163050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150912170502) do
     t.string   "youtube_id"
     t.string   "title"
     t.integer  "assignment_version_id"
+    t.boolean  "attachment"
   end
 
   create_table "cohorts", force: :cascade do |t|
@@ -44,10 +45,11 @@ ActiveRecord::Schema.define(version: 20150912170502) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "text"
-    t.integer  "submission_id"
+    t.integer  "assignment_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "user_id"
+    t.integer  "student_id"
   end
 
   create_table "locations", force: :cascade do |t|
