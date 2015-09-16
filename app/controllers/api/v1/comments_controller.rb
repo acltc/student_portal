@@ -10,7 +10,7 @@ class Api::V1::CommentsController < ApplicationController
     if @comment.save
       if @comment.user.instructor_or_administrator
         student = User.find(params[:student_id])
-        PortalMailer.notify_student(student).deliver_now
+        PortalMailer.notify_student(student, @comment).deliver_now
       end
     else
     end

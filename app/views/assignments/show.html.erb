@@ -2,7 +2,13 @@
   <div class="row row-margin">
     <div class="col-md-2">
       <div class="white">
-        <%= link_to "Assignment List", "/assignments/?student_id=#{@student.id}" %><br/>
+        Prework Week <%= @assignment.week  %><br/>
+        <% @all_assignments_of_week.each do |assignment| %>
+          <span class="<%= "current-assignment" if assignment.id == @assignment.id %>">
+            <%= link_to "#{assignment.title[0..17]}...", "/assignments/#{assignment.id}?student_id=#{@student.id}" %></span><br/>
+        <% end %>
+        <br/>
+        <%= link_to "Back to Index", "/assignments/?student_id=#{@student.id}" %><br/>
         <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}" if current_user.instructor_or_administrator %>
       </div>
     </div>
