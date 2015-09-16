@@ -208,9 +208,6 @@ textarea.submission-box {
   margin-bottom: 5px;
 }
 
-textarea.comment-box {
-  height: 200px;
-}
 
 .submitted-date {
   margin: -3px 0 15px 0;
@@ -251,6 +248,11 @@ textarea.comment-box {
   margin: 0px;
   padding: 5px;
   // padding: 20px 10px 10px 10px;
+}
+
+textarea.comment-write {
+  height: 200px;
+  margin: 5px 0px 5px 0px;
 }
 
 .author-info {
