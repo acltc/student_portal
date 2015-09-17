@@ -6,7 +6,7 @@ class Api::V1::SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = Submission.new(user_id: params[:student_id], assignment_id: params[:assignment_id], answer:params[:submission_text], solution: params[:file])
+    @submission = Submission.new(user_id: params[:student_id], assignment_id: params[:assignment_id], answer: params[:submission_text], solution: params[:file], viewed_by_admin: false)
     if @submission.save
     else
     end
