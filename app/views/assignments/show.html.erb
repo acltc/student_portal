@@ -9,7 +9,12 @@
         <% end %>
         <br/>
         <%= link_to "Back to Index", "/assignments/?student_id=#{@student.id}" %><br/>
-        <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}" if current_user.instructor_or_administrator %>
+        <% if current_user.instructor_or_administrator  %>
+          <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}"  %><br/>
+          <input type="checkbox" value="true" ng-checked="submissions[submissions.length - 1].viewed_by_admin" ng-click="changeViewedByAdmin()">
+          <span class="un-viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === false">Mark Viewed by Admin?</span>
+          <span class="viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === true">Viewed By Admin</span>
+        <% end %>
       </div>
     </div>
     <div class="col-md-10">
@@ -35,13 +40,13 @@
             <div ng-if="texts[texts.length - 1].answer">
               <pre>{{ texts[texts.length - 1].answer }}</pre>
             </div>
-            <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution here ***"></textarea>
+            <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution Here ***"></textarea>
             <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit / Update Text</button>
           </tab>
           <tab heading="History">
             <div class="history-box">
               <div ng-show="submissions.length === 0">
-                *** There have been no submissions yet. ***
+                *** There have been no submissions yet ***
               </div>
               <div ng-repeat="submission in submissions">
                 <div ng-if="submission.answer">

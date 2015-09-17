@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 <% cohort.users.each do |student| %>
-                <tr>
+                <tr class="<%= student.submissions.last.viewed_by_admin ? 'success' : 'danger' if student.submissions.any? %>">
                   <td><%= student.full_name %></td>
                   <td><%= student.email %></td>
                   <td><%= link_to (student.submissions.any? ? student.submissions.last.updated_at.strftime("%d %b %Y %l:%M %p") : "Nothing Submitted"), "/assignments/?student_id=#{student.id}" %></td>

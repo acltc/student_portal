@@ -23,6 +23,14 @@ class Api::V1::SubmissionsController < ApplicationController
     render json: {url: @url}
   end
 
+  def update
+    @submission = Submission.find(params[:id])
+    view_boolean = @submission.viewed_by_admin
+    if @submission.update(viewed_by_admin: !view_boolean)
+      render json: {submission: @submission}
+    end
+  end
+
   def destroy
     Submission.find(params[:id]).destroy
     render json: "204"

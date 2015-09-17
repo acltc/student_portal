@@ -128,6 +128,15 @@
       });
     }
 
+    $scope.changeViewedByAdmin = function() {
+      var index = $scope.submissions.length - 1
+      var lastSubmission = $scope.submissions[index]
+      $http.patch('/api/v1/submissions/'+lastSubmission.id).then(function(response) {
+        var submission = response.data.submission;
+        $scope.submissions[index] = submission;
+      });
+    }
+
     window.scope = $scope;
 
   });
