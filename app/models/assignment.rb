@@ -14,4 +14,14 @@ class Assignment < ActiveRecord::Base
     ).presigned_url(:get, expires_in: 60 * 60)
   end
 
+  def get_css_class_resources(viewed_assignment, current_user, student)
+    css_class = ""
+    css_class << "current-assignment" if id == viewed_assignment.id
+    if current_user.instructor_or_administrator && student.submissions.where(assignment_id: id).any?
+      admin_highlight = student.submissions.where(assignment_id: id).last.viewed_by_admin ? " viewed-key" : " un-viewed-key"
+      css_class << admin_highlight
+    end
+    return css_class
+  end
+
 end

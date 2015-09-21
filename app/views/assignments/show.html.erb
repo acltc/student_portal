@@ -2,18 +2,19 @@
   <div class="row row-margin">
     <div class="col-md-2">
       <div class="white">
-        <%= link_to "Back to Index", "/assignments/?student_id=#{@student.id}&tab_index=#{@assignment.week}" %><br/>
+        <%= link_to "Index", "/assignments/?student_id=#{@student.id}&tab_index=#{@assignment.week}" %><br/>
         <% if current_user.instructor_or_administrator  %>
           <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}"  %><br/>
+          <%= link_to "Cohort Dashboard", cohorts_path %><br/>
           <input type="checkbox" value="true" ng-checked="submissions[submissions.length - 1].viewed_by_admin" ng-click="changeViewedByAdmin()" ng-if="submissions.length != 0">
-          <span class="un-viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === false">Mark Viewed by Admin?</span>
-          <span class="viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === true">Viewed By Admin</span>
+          <span class="un-viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === false">Mark the Student's Solution Viewed by Instructor/Admin?</span>
+          <span class="viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === true">Viewed By Instructor/Admin</span>
         <br />
         <% end %>
         <br/>
         Prework Week <%= @assignment.week  %><br/>
         <% @all_assignments_of_week.each do |assignment| %>
-          <span class="<%= "current-assignment" if assignment.id == @assignment.id %>">
+          <span class="<%= assignment.get_css_class_resources(@assignment, current_user, @student) %>">
             <%= link_to "#{assignment.title[0..17]}...", "/assignments/#{assignment.id}?student_id=#{@student.id}" %></span><br/>
         <% end %>
         <br/>
