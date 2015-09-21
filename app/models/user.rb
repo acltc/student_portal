@@ -34,6 +34,9 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def unmarked_submissions?
+    submissions.where(viewed_by_admin: false).any? ? 'danger' : 'success' if submissions.any?
+  end
 
 
 

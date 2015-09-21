@@ -90,7 +90,8 @@
           var text = {
             id: response.data.id,
             answer: response.data.answer,
-            created_at: response.data.created_at
+            created_at: response.data.created_at,
+            viewed_by_admin: response.data.viewed_by_admin
           };
           $scope.submissions.push(text);
           $scope.texts.push(text);

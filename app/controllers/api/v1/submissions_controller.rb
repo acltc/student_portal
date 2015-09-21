@@ -26,8 +26,9 @@ class Api::V1::SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     view_boolean = @submission.viewed_by_admin
-    if @submission.update(viewed_by_admin: !view_boolean)
-      render json: {submission: @submission}
+    submissions_of_assignment = Submission.where("user_id = ? AND assignment_id = ?", @submission.user_id, @submission.assignment_id)
+    if submissions_of_assignment.update_all(viewed_by_admin: !view_boolean)
+      render json: {submission: submissions_of_assignment.last}
     end
   end
 
