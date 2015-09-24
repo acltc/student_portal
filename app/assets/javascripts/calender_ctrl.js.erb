@@ -8,12 +8,21 @@
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+
+    $scope.setup = function(gmail_calendar) {
+      $scope.eventSource = {
+        googleCalendarApiKey: "<%= ENV['API_KEY'] %>",
+        url: gmail_calendar,
+        className: 'gcal-event'           // an option!
+      };
+      $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+    }
     
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
             googleCalendarApiKey: "<%= ENV['API_KEY'] %>",
-            url: "<%= ENV['CALENDAR_ID'] %>",
+            url: $scope.gmail_calendar,
             className: 'gcal-event'           // an option!
     };
 
@@ -120,7 +129,6 @@
       }
     };
     /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     // $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
     window.scope = $scope;

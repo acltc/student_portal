@@ -159,7 +159,7 @@ p.capstone_blog {
 .calendar {
   background: #FFFFFF;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 5px;
   border-radius: 5px;
   border: 2px solid #000000;
 }
@@ -168,6 +168,14 @@ p.capstone_blog {
   background-color: #AFDFE0;
 }
 
+.cohort-details-calendar {
+  background: #FFFFFF;
+  border: #000000 2px solid;
+  border-radius: 5px;
+  list-style-type: none;
+  padding: 5px;
+  font-size: 20px;
+}
 ///////////////////// Students /////////////////////////////
 
 .row-margin {
@@ -186,7 +194,9 @@ table.student {
   color: red;
 }
 
-
+.admin-select {
+  margin: 20px 0px 20px 0px;
+}
 
 
 //////////////////////// Prework /////////////////////////////

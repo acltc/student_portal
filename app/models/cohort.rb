@@ -6,4 +6,8 @@ class Cohort < ActiveRecord::Base
 
   validates :start_date, presence: true
   validates_associated :location, :assignment_version
+
+  def all_attributes
+    "Start Date: #{start_date} Instructor: #{instructor.full_name} Location: #{location.name}"
+  end
 end

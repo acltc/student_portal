@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917161421) do
+ActiveRecord::Schema.define(version: 20150924020045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150917161421) do
     t.integer  "location_id"
     t.string   "nickname"
     t.integer  "assignment_version_id"
+    t.string   "gmail_calendar"
   end
 
   create_table "comments", force: :cascade do |t|

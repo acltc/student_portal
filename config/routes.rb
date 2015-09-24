@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations' }
   root 'pages#index'
   get '/curriculum' => 'curriculum#index'
+  get '/curriculum/select_cohort' => 'curriculum#select_cohort'
   resources :cohorts
   resources :students
   resources :assignments

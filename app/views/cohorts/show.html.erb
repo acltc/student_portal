@@ -7,6 +7,7 @@
       <p>Nickname: <%= @cohort.nickname %></p>  
       <p>Start Date: <%= @cohort.start_date.strftime("%d %b %Y") %></p>  
       <p>Instructor: <%= @cohort.instructor.full_name %></p>
+      <p>Gmail Calendar Email Address: <%= @cohort.gmail_calendar %></p>
       <p><%= link_to "Edit", edit_cohort_path(@cohort) %></p>
     </div>
   </div>
