@@ -19,6 +19,7 @@
                   Start Date: <%= cohort.start_date.strftime("%d %b %Y") %></br>
                   Location: <%= cohort.location.name %></br>
                   Cohort Nickname: <%= cohort.nickname %></br>
+                  Gmail Calender: <%= cohort.gmail_calendar %></br>
                   Total Students: <%= cohort.users.count %></br>
                   <%= link_to "Edit", edit_cohort_path(cohort) %>
                 </h4>

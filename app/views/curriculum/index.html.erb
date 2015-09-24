@@ -38,7 +38,7 @@
   <div class="admin-select">
     <%= form_tag curriculum_select_cohort_path, method: :get do %>
       <%= collection_select(:post, :cohort_id, @cohorts, :id, :all_attributes, {selected: @cohort.id}) %>
-      <%= submit_tag "Select Cohort", class: "btn btn-success" %>
+      <%= submit_tag "Select Cohort" %>
     <% end %>
   </div>
 <% end %>
