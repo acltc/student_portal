@@ -44,7 +44,7 @@
 <% end %>
 <div class="cohort-details-calendar">
   <div class="row">
-    <div class="col-md-4 text-left">Start Date: <%= @cohort.start_date %></div>
+    <div class="col-md-4 text-left">Start Date: <%= @cohort.start_date.strftime("%b %d, %Y") %></div>
     <div class="col-md-4 text-center">Instructor: <%= @cohort.instructor.full_name %></div>
     <div class="col-md-4 text-right">Location: <%= @cohort.location.name %></div>
   </div>
