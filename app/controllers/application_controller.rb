@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def authenticate_admin_user!
-    redirect_to root_path if current_user.student
+    redirect_to root_path if (current_user == nil) || current_user.student
   end
 end
