@@ -40,7 +40,7 @@ body {
   margin: 0% 5% 0% 5%;
 }
 
-.warning {
+.warning-text {
   color: red;
 }
 
@@ -314,4 +314,8 @@ pre {
 
 .un-viewed-key {
   background: #F2DEDE;
+}
+
+.un-viewed-key-comment {
+  background: #FCF8E3;
 }

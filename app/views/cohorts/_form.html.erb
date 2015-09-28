@@ -2,7 +2,7 @@
   <div class="col-md-2"></div>
   <div class="col-md-8">
   <%= form_for @cohort do |f| %>
-    <p class="warning"><%= @cohort.errors.full_messages.join("<br/>").html_safe if @cohort.errors %></p>
+    <p class="warning-text"><%= @cohort.errors.full_messages.join("<br/>").html_safe if @cohort.errors %></p>
     <div class="form-group">
       <%= f.label :nickname %>
       <%= f.text_field :nickname, class: "form-control" %>

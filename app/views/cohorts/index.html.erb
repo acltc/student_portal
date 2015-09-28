@@ -6,8 +6,9 @@
         <p>Filter by: <%= link_to instructor.full_name, "/cohorts?instructor_id=#{instructor.id}" %></p>
       <% end %>
         <p>key:<br/>
-          <span class="un-viewed-key">exercise not viewed by instr.</span><br/>
-          <span class="viewed-key">exercise viewed by instr.</span>
+          <span class="un-viewed-key">Un-viewed Submission</span><br/>
+          <span class="un-viewed-key-comment">Un-viewed Comment</span><br/>
+          <span class="viewed-key">Viewed Sub/Comment</span>
         </p>
     </div>
       <div class="col-md-10">
@@ -30,7 +31,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Email Address</th>
-                  <th>Prework (Last Submission)</th>
+                  <th>Last Submission</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>Student Added</th>
@@ -38,10 +39,10 @@
               </thead>
               <tbody>
                 <% cohort.users.each do |student| %>
-                <tr class="<%= student.unmarked_submissions? %>">
+                <tr class="<%= viewed_by_admin_label_per_student(student) %>">
                   <td><%= student.full_name %></td>
                   <td><%= student.email %></td>
-                  <td><%= link_to (student.submissions.any? ? "Week #{student.submissions.last.assignment.week}: #{student.submissions.last.assignment.title} (#{student.submissions.last.updated_at.strftime("%b %d")})" : "Nothing Submitted"), "/assignments/?student_id=#{student.id}" %></td>
+                  <td><%= link_to(student.submissions? ? last_submission_or_comment(student) : "Nothing Submitted", link_to_assignment(student)) %></td>
                   <td><%= link_to "Edit", "students/#{student.id}/edit" %></td>
                   <td>
                     <%= link_to "Delete", student_path(student), method: "delete", data: {confirm: "Are you sure? #{student.full_name}'s account and all their prework submitted will be deleted."} %>
