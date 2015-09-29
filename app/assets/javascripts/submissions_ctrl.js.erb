@@ -10,7 +10,6 @@
     $scope.comment_viewed = null;
     $scope.combined_viewed = null;
 
-
     $scope.setup = function(assignment_id, student_id) {
       $scope.assignment_id = assignment_id;
       $scope.student_id = student_id;
@@ -174,18 +173,16 @@
         var update_viewed = false;
       }
       if ($scope.submissions.length > 0 && update_viewed != $scope.Submission_viewed) {
-        var sub_index = $scope.submissions.length - 1
+        var sub_index = $scope.submissions.length - 1;
         var lastSubmission = $scope.submissions[sub_index];
         $http.patch('/api/v1/submissions/'+lastSubmission.id, {update_viewed: !$scope.submission_viewed}).then(function(response) {
           var submission = response.data.submission;
-          console.log("this is what's returned");
-          console.log(submission);
           $scope.submissions[sub_index] = submission;
           $scope.checkViewedSubmission();
         });
       }
       if ($scope.comments.length > 0 && update_viewed != $scope.comment_viewed) {
-        var com_index = $scope.comments.length - 1
+        var com_index = $scope.comments.length - 1;
         var lastComment = $scope.comments[com_index];
         $http.patch('/api/v1/comments/'+lastComment.id, {update_viewed: !$scope.comment_viewed}).then(function(response) {
           var comment = response.data.comment;
