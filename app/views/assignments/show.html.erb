@@ -6,9 +6,11 @@
         <% if current_user.instructor_or_administrator  %>
           <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}"  %><br/>
           <%= link_to "Cohort Dashboard", cohorts_path %><br/>
-          <input type="checkbox" value="true" ng-checked="submissions[submissions.length - 1].viewed_by_admin" ng-click="changeViewedByAdmin()" ng-if="submissions.length != 0">
-          <span class="un-viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === false">Mark the Student's Solution Viewed by Instructor/Admin?</span>
-          <span class="viewed" ng-if="submissions[submissions.length - 1].viewed_by_admin === true">Viewed By Instructor/Admin</span>
+          <div ng-if="submission_viewed != null || comment_viewed != null">
+            <input type="checkbox" value="true" ng-checked="combined_viewed" ng-click="changeViewedByAdmin()">
+            <span class="un-viewed" ng-if="!combined_viewed">Mark Student's Solution and/or Comment Viewed by Instructor/Admin?</span>
+            <span class="viewed" ng-if="combined_viewed">Viewed By Instructor/Admin</span>
+          </div>
         <br />
         <% end %>
         <br/>

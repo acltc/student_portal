@@ -14,8 +14,9 @@ module AssignmentHelper
     @unviewed_comment = "un-viewed-key-comment"
     @viewed_both = "viewed-key"
     css_class = ""
-    css_class << "current-assignment" if assignment.id == viewed_assignment.id
-    css_class << submission_or_comment?(student, assignment)
+    css_class << "current-assignment " if assignment.id == viewed_assignment.id
+    css_class << submission_or_comment?(student, assignment) if current_user.instructor_or_administrator
+    css_class
   end
 
   private

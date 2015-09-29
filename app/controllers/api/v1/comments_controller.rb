@@ -17,4 +17,13 @@ class Api::V1::CommentsController < ApplicationController
     @comment.save
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    view_boolean = params[:update_viewed]
+    comments_of_assignment = Comment.where("user_id = ? AND assignment_id = ?", @comment.user_id, @comment.assignment_id)
+    if comments_of_assignment.update_all(viewed_by_admin: view_boolean)
+      render json: {comment: comments_of_assignment.last}
+    end
+  end
+
 end

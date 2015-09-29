@@ -6,6 +6,10 @@
     $scope.files = [];
     $scope.comments = [];
     $scope.submittedText = {text: null};
+    $scope.submission_viewed = null;
+    $scope.comment_viewed = null;
+    $scope.combined_viewed = null;
+
 
     $scope.setup = function(assignment_id, student_id) {
       $scope.assignment_id = assignment_id;
@@ -15,6 +19,7 @@
         if($scope.submissions.length > 0) {
           $scope.getFiles();
           $scope.getTexts();
+          $scope.checkViewedSubmission();
         } 
       }, function(response) {
       });
@@ -24,6 +29,9 @@
     $scope.getComments = function() {
       $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id).then(function(response) {
         $scope.comments = response.data;
+        if($scope.comments.length > 0) {
+          $scope.checkViewedComment();
+        }
       });
     }
 
@@ -51,6 +59,36 @@
           $scope.texts.push(text);
         }
       }   
+    }
+
+    $scope.checkViewedSubmission = function() {
+      if ($scope.submissions[$scope.submissions.length - 1].viewed_by_admin === false) {
+        $scope.submission_viewed = false;
+      } else {
+        $scope.submission_viewed = true;
+      }
+      $scope.checkViewedByAdmin();
+    }
+
+    $scope.checkViewedComment = function() {
+      if ($scope.comments[$scope.comments.length - 1].viewed_by_admin === false) {
+        $scope.comment_viewed = false;
+      } else {
+        $scope.comment_viewed = true;
+      }
+      $scope.checkViewedByAdmin();
+    }
+
+    $scope.checkViewedByAdmin = function() {
+      if ($scope.submission_viewed && $scope.comment_viewed) {
+        $scope.combined_viewed = true;
+      } else if ($scope.submission_viewed && $scope.comment_viewed === null) {
+        $scope.combined_viewed = true;
+      } else if ($scope.submission_viewed === null && $scope.comment_viewed) {
+        $scope.combined_viewed = true;
+      } else {
+        $scope.combined_viewed = false;
+      }
     }
 
     $scope.uploadFiles = function(uploadingFiles) {
@@ -130,12 +168,31 @@
     }
 
     $scope.changeViewedByAdmin = function() {
-      var index = $scope.submissions.length - 1
-      var lastSubmission = $scope.submissions[index]
-      $http.patch('/api/v1/submissions/'+lastSubmission.id).then(function(response) {
-        var submission = response.data.submission;
-        $scope.submissions[index] = submission;
-      });
+      if ($scope.submission_viewed === false || $scope.comment_viewed === false) {
+        var update_viewed = true;
+      } else {
+        var update_viewed = false;
+      }
+      if ($scope.submissions.length > 0 && update_viewed != $scope.Submission_viewed) {
+        var sub_index = $scope.submissions.length - 1
+        var lastSubmission = $scope.submissions[sub_index];
+        $http.patch('/api/v1/submissions/'+lastSubmission.id, {update_viewed: !$scope.submission_viewed}).then(function(response) {
+          var submission = response.data.submission;
+          console.log("this is what's returned");
+          console.log(submission);
+          $scope.submissions[sub_index] = submission;
+          $scope.checkViewedSubmission();
+        });
+      }
+      if ($scope.comments.length > 0 && update_viewed != $scope.comment_viewed) {
+        var com_index = $scope.comments.length - 1
+        var lastComment = $scope.comments[com_index];
+        $http.patch('/api/v1/comments/'+lastComment.id, {update_viewed: !$scope.comment_viewed}).then(function(response) {
+          var comment = response.data.comment;
+          $scope.comments[com_index] = comment;
+          $scope.checkViewedComment();
+        });
+      }
     }
 
     window.scope = $scope;
