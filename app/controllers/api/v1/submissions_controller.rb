@@ -1,5 +1,6 @@
 class Api::V1::SubmissionsController < ApplicationController
-
+  include AdminView
+  
   def index
     @submissions = User.find(params[:student_id]).submissions.where(assignment_id: params[:assignment_id]) || Submission.new(answer: "Nothing Submitted")
   end
@@ -25,10 +26,8 @@ class Api::V1::SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     view_boolean = params[:update_viewed]
-    submissions_of_assignment = Submission.where("user_id = ? AND assignment_id = ?", @submission.user_id, @submission.assignment_id)
-    if submissions_of_assignment.update_all(viewed_by_admin: view_boolean)
-      render json: {submission: submissions_of_assignment.last}
-    end
+    last_assignment = reverse_admin_views(@submission, view_boolean)
+    render json: {submission: last_assignment}
   end
 
   def destroy
