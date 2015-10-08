@@ -1,5 +1,4 @@
 class Api::V1::CommentsController < ApplicationController
-  include AdminView
 
   def index
     @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]])
@@ -20,7 +19,7 @@ class Api::V1::CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     view_boolean = params[:update_viewed]
-    last_assignment = reverse_admin_views(@comment, view_boolean)
+    last_assignment = @comment.reverse_admin_views(view_boolean)
     render json: {comment: last_assignment}
   end
 

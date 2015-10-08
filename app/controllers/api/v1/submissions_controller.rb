@@ -1,6 +1,5 @@
 class Api::V1::SubmissionsController < ApplicationController
-  include AdminView
-  
+
   def index
     @submissions = User.find(params[:student_id]).submissions.where(assignment_id: params[:assignment_id]) || Submission.new(answer: "Nothing Submitted")
   end
@@ -12,6 +11,7 @@ class Api::V1::SubmissionsController < ApplicationController
     end
   end
 
+  #move this to module
   def download_file
     credentials = Aws::Credentials.new(ENV['S3_KEY'], ENV['S3_SECRET'])
     s3 = Aws::S3::Client.new(region:'us-west-2', credentials: credentials)
@@ -26,7 +26,7 @@ class Api::V1::SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     view_boolean = params[:update_viewed]
-    last_assignment = reverse_admin_views(@submission, view_boolean)
+    last_assignment = @submission.reverse_admin_views(view_boolean)
     render json: {submission: last_assignment}
   end
 
