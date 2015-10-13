@@ -8,6 +8,6 @@ class PortalMailer < ApplicationMailer
   def notify_student(student, comment)
     @student = student
     @comment = comment
-    mail(from: "no-reply@anyonecanlearntocode.com", to: @student.email, subject: 'You have a new message from your instructor', bcc: "mark@anyonecanlearntocode.com")
+    mail(from: "no-reply@anyonecanlearntocode.com", to: @student.email, subject: 'You have a new message from your instructor')
   end
 end
