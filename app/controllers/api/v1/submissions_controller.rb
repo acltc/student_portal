@@ -11,7 +11,7 @@ class Api::V1::SubmissionsController < ApplicationController
     end
   end
 
-  #move this to module
+  #move this to module when possible
   def download_file
     credentials = Aws::Credentials.new(ENV['S3_KEY'], ENV['S3_SECRET'])
     s3 = Aws::S3::Client.new(region:'us-west-2', credentials: credentials)
