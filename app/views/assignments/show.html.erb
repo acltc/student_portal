@@ -1,3 +1,4 @@
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 <div ng-controller="submissionsCtrl" ng-init="setup(<%= params[:id] %>, <%= @student.id %>)">
   <div class="row row-margin">
     <div class="col-md-2">
@@ -14,7 +15,7 @@
         <br />
         <% end %>
         <br/>
-        Prework Week <%= @assignment.week  %><br/>
+        Prework Week <%= @assignment.week %><br/>
         <% @all_assignments_of_week.each do |assignment| %>
           <span class="<%= get_css_classes_assignment_show(@assignment, current_user, @student, assignment) %>">
             <%= link_to "#{assignment.title[0..17]}...", "/assignments/#{assignment.id}?student_id=#{@student.id}" %></span><br/>
@@ -32,9 +33,7 @@
             </div>
           <% end %>
         <div>
-          <pre>
-            <%= @assignment.question %>
-          </pre>
+          <pre><%= @assignment.question %></pre>
         </div>
       </div>
 
@@ -43,7 +42,7 @@
         <tabset class="tab-box" justified="true">
           <tab heading="Submit/Update Solution">
             <div ng-if="texts[texts.length - 1].answer">
-              <pre>{{ texts[texts.length - 1].answer }}</pre>
+              <pre class="prettyprint">{{ texts[texts.length - 1].answer }}</pre>
             </div>
             <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution Here ***"></textarea>
             <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit/Update Text</button>
@@ -97,9 +96,7 @@
               </div>
               <div class="col-md-9">
                 <div class="comment-box">
-                  <pre>
-                    {{ comment.text }}
-                  </pre>
+                  <pre>{{ comment.text }}</pre>
                 </div>
               </div>
             </div>
