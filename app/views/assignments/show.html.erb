@@ -42,7 +42,7 @@
         <tabset class="tab-box" justified="true">
           <tab heading="Submit/Update Solution">
             <div ng-if="texts[texts.length - 1].answer">
-              <pre class="prettyprint">{{ texts[texts.length - 1].answer }}</pre>
+              <pre class="prettyprint linenums">{{ texts[texts.length - 1].answer }}</pre>
             </div>
             <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution Here ***"></textarea>
             <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit/Update Text</button>
@@ -54,7 +54,7 @@
               </div>
               <div ng-repeat="submission in submissions">
                 <div ng-if="submission.answer">
-                  <pre class="prettyprint">{{ submission.answer }}</pre>
+                  <pre class="prettyprint linenums">{{ submission.answer }}</pre>
                 </div>
                 <div ng-if="submission.name">
                   {{ submission.name }} uploaded

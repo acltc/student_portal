@@ -325,3 +325,7 @@ textarea#assignment_question {
 .un-viewed-key-comment {
   background: #FCF8E3;
 }
+
+.prettyprint ol.linenums > li {
+  list-style-type: decimal;
+}
