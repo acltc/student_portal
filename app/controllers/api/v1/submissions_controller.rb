@@ -26,8 +26,10 @@ class Api::V1::SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     view_boolean = params[:update_viewed]
-    last_assignment = @submission.reverse_admin_views(view_boolean)
-    render json: {submission: last_assignment}
+    submissions = Submission.where("user_id = ? AND assignment_id = ?", @submission.user_id, @submission.assignment_id)
+    if submissions.update_all(viewed_by_admin: view_boolean)
+      render json: {submission: submissions.last}
+    end
   end
 
   def destroy

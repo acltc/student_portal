@@ -19,8 +19,10 @@ class Api::V1::CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     view_boolean = params[:update_viewed]
-    last_assignment = @comment.reverse_admin_views(view_boolean)
-    render json: {comment: last_assignment}
+    comments = Comment.where("student_id = ? AND assignment_id = ?", @comment.student_id, @comment.assignment_id)
+    if comments.update_all(viewed_by_admin: view_boolean)
+      render json: {comment: comments.last}
+    end
   end
 
 end
