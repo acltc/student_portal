@@ -1,7 +1,7 @@
 class Api::V1::SubmissionsController < ApplicationController
 
   def index
-    @submissions = User.find(params[:student_id]).submissions.where(assignment_id: params[:assignment_id]) || Submission.new(answer: "Nothing Submitted")
+    @submissions = User.find(params[:student_id]).submissions.where(assignment_id: params[:assignment_id]).order(:id) || Submission.new(answer: "Nothing Submitted")
   end
 
   def create

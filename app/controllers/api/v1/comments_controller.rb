@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < ApplicationController
 
   def index
-    @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]])
+    @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]]).order(:id)
   end
 
   def create
