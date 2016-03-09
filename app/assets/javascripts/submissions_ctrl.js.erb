@@ -5,10 +5,12 @@
     $scope.texts = [];
     $scope.files = [];
     $scope.comments = [];
+    $scope.allStudentInstructorComments = [];
     $scope.submittedText = {text: null};
     $scope.submission_viewed = null;
     $scope.comment_viewed = null;
     $scope.combined_viewed = null;
+    $scope.commentText = "";
 
     $scope.setup = function(assignment_id, student_id) {
       $scope.assignment_id = assignment_id;
@@ -27,7 +29,8 @@
 
     $scope.getComments = function() {
       $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id).then(function(response) {
-        $scope.comments = response.data;
+        $scope.comments = response.data["comments_per_student"];
+        $scope.allStudentInstructorComments = response.data["instructor_comments"];
         if($scope.comments.length > 0) {
           $scope.checkViewedComment();
         }
@@ -190,6 +193,10 @@
           $scope.checkViewedComment();
         });
       }
+    }
+
+    $scope.addPreviousInstructorComment = function(comment) {
+      $scope.commentText += comment.text;
     }
 
     window.scope = $scope;

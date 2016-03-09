@@ -3,4 +3,9 @@ class Comment < ActiveRecord::Base
   
   belongs_to :assignment
   belongs_to :user
+
+  def student
+    User.find(student_id)
+  end
+
 end
