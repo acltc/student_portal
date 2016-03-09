@@ -103,6 +103,23 @@
           </div>
           <textarea ng-model="commentText" class="form-control comment-write"></textarea>
         <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
+        <% if current_user.instructor %>
+          <div class="instructor-previous-messages">
+            <h3>Previous Comments made by you to students.</h3>
+            <p class="helper-text-heading">Click on previous comment to add text to comment box.</p>
+              <div class="instructor-comment-filter form-group">
+                <input class="form-control" ng-model="commentFilter" placeholder="filter comments...">
+            </div>
+            <div ng-repeat="comment in allStudentInstructorComments | filter: {text: commentFilter}">
+              <div class="row">
+                <div class="col-md-12">
+                  <div>Commented on {{comment.student}}'s submission at {{comment.created_at}}</div>
+                  <pre class="instructor-hover" ng-click="addPreviousInstructorComment(comment)"> {{ comment.text}}</pre>
+                </div>
+              </div>
+            </div>     
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

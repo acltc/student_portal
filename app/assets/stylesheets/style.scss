@@ -329,3 +329,20 @@ textarea#assignment_question {
 .prettyprint ol.linenums > li {
   list-style-type: decimal;
 }
+
+.instructor-hover:hover { 
+  background: #e6e6e6;
+}
+
+.instructor-previous-messages {
+  margin: 20px 0px 0px 0px;
+}
+
+.helper-text-heading {
+  font-style: italic;
+  margin: -10px 0px 0px 0px;
+}
+
+.instructor-comment-filter {
+  margin: 0px 0px 30px 0px;
+}
