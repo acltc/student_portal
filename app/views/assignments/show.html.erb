@@ -108,12 +108,12 @@
             <h3>Previous Comments made by you to students.</h3>
             <p class="helper-text-heading">Click on previous comment to add text to comment box.</p>
               <div class="instructor-comment-filter form-group">
-                <input class="form-control" ng-model="commentFilter" placeholder="filter comments...">
+                <input class="form-control" ng-model="commentFilter.$" placeholder="filter by comment text or student name...">
             </div>
-            <div ng-repeat="comment in allStudentInstructorComments | filter: {text: commentFilter}">
+            <div ng-repeat="comment in allStudentInstructorComments | filter: commentFilter">
               <div class="row">
                 <div class="col-md-12">
-                  <div>Commented on {{comment.student}}'s submission at {{comment.created_at}}</div>
+                  <div>Commented on <span class="student-commented">{{comment.student}}'s</span> submission at {{comment.created_at}}</div>
                   <pre class="instructor-hover" ng-click="addPreviousInstructorComment(comment)"> {{ comment.text}}</pre>
                 </div>
               </div>
