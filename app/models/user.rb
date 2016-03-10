@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   belongs_to :cohort
   has_many :comments
+  has_many :cohorts, foreign_key: 'instructor_id'
 
   validates :first_name, presence: true
   validates :last_name, presence: true
