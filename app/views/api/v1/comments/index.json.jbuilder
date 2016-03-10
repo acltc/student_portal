@@ -11,5 +11,6 @@ if current_user.instructor
     json.text comment.text
     json.created_at comment.created_at.strftime("%m/%d/%Y, %I:%M:%S %p")
     json.student comment.student.full_name
+    json.assignment comment.assignment.title
   end
 end

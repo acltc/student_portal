@@ -113,7 +113,17 @@
             <div ng-repeat="comment in allStudentInstructorComments | filter: commentFilter">
               <div class="row">
                 <div class="col-md-12">
-                  <div>Commented on <span class="student-commented">{{comment.student}}'s</span> submission at {{comment.created_at}}</div>
+                  <div class="row">
+                    <div class="col-md-4 student-commented">
+                      To {{comment.student}}:
+                    </div>
+                    <div class="col-md-4 text-center assignment-commented">
+                      {{comment.assignment}}
+                    </div>
+                    <div class="col-md-4 text-right">
+                      {{comment.created_at}}
+                    </div>
+                  </div>
                   <pre class="instructor-hover" ng-click="addPreviousInstructorComment(comment)"> {{ comment.text}}</pre>
                 </div>
               </div>
