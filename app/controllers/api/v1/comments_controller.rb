@@ -3,7 +3,10 @@ class Api::V1::CommentsController < ApplicationController
   def index
     @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]]).order(:id)
     if current_user.instructor 
-      @all_comments_from_instructor = Comment.where("assignment_id = ? and user_id = ?", params[:assignment_id], current_user.id).order(id: :desc)
+      @all_comments_from_instructor = Comment.where(user_id: current_user.id).order("assignment_id = #{params[:assignment_id]} DESC, id DESC")
+
+
+      # @all_comments_from_instructor.sort_by(|comment| comment.assortment_id == params[:assignment_id])
     end
   end
 
