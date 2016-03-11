@@ -11,7 +11,7 @@
 
     $scope.setup = function(gmail_calendar) {
       $scope.eventSource = {
-        googleCalendarApiKey: "<%= ENV['API_KEY'] %>",
+        googleCalendarApiKey: '<%= ENV['API_KEY'] %>',
         url: gmail_calendar,
         className: 'gcal-event'           // an option!
       };
@@ -21,7 +21,7 @@
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            googleCalendarApiKey: "<%= ENV['API_KEY'] %>",
+            googleCalendarApiKey: '<%= ENV['API_KEY'] %>',
             url: $scope.gmail_calendar,
             className: 'gcal-event'           // an option!
     };
