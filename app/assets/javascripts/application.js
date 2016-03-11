@@ -22,4 +22,7 @@
 //= require ui-bootstrap.min
 //= require gcal
 //= require calendar
+//= require prism
+//= require ng-prism
+//= require angular-sanitize.min
 //= require_tree .
