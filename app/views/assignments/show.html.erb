@@ -1,4 +1,3 @@
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 <div ng-controller="submissionsCtrl" ng-init="setup(<%= params[:id] %>, <%= @student.id %>)">
   <div class="row row-margin">
     <div class="col-md-2">
@@ -42,7 +41,7 @@
         <tabset class="tab-box" justified="true">
           <tab heading="Submit/Update Solution">
             <div ng-if="texts[texts.length - 1].answer">
-              <pre class="prettyprint linenums">{{ texts[texts.length - 1].answer }}</pre>
+              <pre ng-prism class="line-numbers language-ruby"><code>{{ texts[texts.length - 1].answer }}</code></pre>
             </div>
             <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Submit/Update Solution Here ***"></textarea>
             <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit/Update Text</button>
@@ -96,12 +95,12 @@
               </div>
               <div class="col-md-9">
                 <div class="comment-box">
-                  <pre>{{ comment.text }}</pre>
+                  <pre ng-bind-html="comment.text">{{ comment.text }}</pre>
                 </div>
               </div>
             </div>
           </div>
-          <textarea ng-model="commentText" class="form-control comment-write"></textarea>
+          <textarea ng-model="commentText" class="form-control comment-write" placeholder="To insert code within your comment, use 3 backticks(`) before and after your code."></textarea>
         <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
         <% if current_user.instructor %>
           <div class="instructor-previous-messages">
@@ -124,7 +123,7 @@
                       {{comment.created_at}}
                     </div>
                   </div>
-                  <pre class="instructor-hover" ng-click="addPreviousInstructorComment(comment)"> {{ comment.text}}</pre>
+                  <pre class="instructor-hover" ng-click="addPreviousInstructorComment(comment)" ng-bind-html="comment.text"> {{ comment.text}}</pre>
                 </div>
               </div>
             </div>     

@@ -60,7 +60,8 @@
           };
           $scope.texts.push(text);
         }
-      }   
+      }
+      Prism.highlightAll();   
     }
 
     $scope.checkViewedSubmission = function() {
@@ -143,8 +144,9 @@
     }
 
     $scope.submitCommentText = function(text) {
+      var codeTagsAdded = $scope.addCodeTagsIfPresent(text);
       var comment = {
-        comment_text: text,
+        comment_text: codeTagsAdded,
         assignment_id: $scope.assignment_id,
         student_id: $scope.student_id 
       };
@@ -153,6 +155,20 @@
         $scope.comments.push(comment);
       }, function(response) {
       });
+    }
+
+    $scope.addCodeTagsIfPresent = function(text) {
+      var openingTag = true;
+      while(text.indexOf("```") != -1) {
+        if (openingTag) {
+          text = text.replace("```", "<pre ng-prism class='language-ruby'><code>");
+          var openingTag = false;
+        } else {
+          text = text.replace("```", "</code></pre>");
+          var openingTag = true;
+        }
+      }
+      return text
     }
 
     $scope.downloadFile = function(file) {
@@ -196,8 +212,15 @@
     }
 
     $scope.addPreviousInstructorComment = function(comment) {
-      $scope.commentText += comment.text;
+      var textBackTicked = $scope.removeCodeTagsIfPresent(comment.text);
+      $scope.commentText += textBackTicked;
     }
+
+    $scope.removeCodeTagsIfPresent = function(text) {
+      return text.replace(/<pre ng-prism class='language-ruby'><code>|<\/code><\/pre>/g, "```");
+    }
+
+
 
     window.scope = $scope;
 
