@@ -32,7 +32,7 @@
             </div>
           <% end %>
         <div>
-          <pre><%= @assignment.question %></pre>
+          <pre><%= @assignment.question.html_safe %></pre>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
               </div>
               <div ng-repeat="submission in submissions">
                 <div ng-if="submission.answer">
-                  <pre class="prettyprint linenums">{{ submission.answer }}</pre>
+                  <pre ng-prism class="line-numbers language-ruby"><code>{{ submission.answer }}</code></pre>
                 </div>
                 <div ng-if="submission.name">
                   {{ submission.name }} uploaded
