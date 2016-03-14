@@ -232,7 +232,6 @@ textarea.submission-box {
   margin-bottom: 5px;
 }
 
-
 .submitted-date {
   margin: -3px 0 15px 0;
   color: #16A496;
@@ -358,4 +357,13 @@ textarea#assignment_question {
   color: #ff6600;
 }
 
+.comment-box {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  color: #333;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
