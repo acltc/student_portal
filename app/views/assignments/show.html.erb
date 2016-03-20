@@ -94,9 +94,7 @@
                 <div>{{ comment.created_at }} </div>
               </div>
               <div class="col-md-9">
-                <div class="comment-box" ng-bind-html="comment.text">
-                  {{ comment.text }}
-                </div>
+                <div class="comment-box" bind-html-compile="comment.text"></div>
               </div>
             </div>
           </div>
@@ -123,7 +121,7 @@
                       {{comment.created_at}}
                     </div>
                   </div>
-                  <div class="comment-box instructor-hover" ng-click="addPreviousInstructorComment(comment)" ng-bind-html="comment.text"> {{ comment.text}} </div>
+                  <div class="comment-box instructor-hover" ng-click="addPreviousInstructorComment(comment)" bind-html-compile="comment.text"> {{ comment.text}} </div>
                 </div>
               </div>
             </div>     
