@@ -99,7 +99,39 @@
             </div>
           </div>
           <textarea ng-model="commentText" class="form-control comment-write" placeholder="To insert code within your comment, use 3 backticks(`) before and after your code."></textarea>
-        <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
+        <div class="row">
+          <div class="col-md-4 left-block">
+            <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
+          </div>
+          <% if current_user.instructor %>
+            <form class="col-md-4 center-block" id="show-grade-container" name="grade_form">
+              <p id="show-grade" ng-if="current_grade" class="center-text">{{ current_grade }}</p>
+              <!-- grade dropdown -->
+              <select name="gradeSelect" id="gradeSelect" ng-model="data.gradeSelect">
+                <option value="">Grade</option> <!-- not selected / blank option -->
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                <option value="A+">A+</option>
+                <option value="N/A">N/A</option>
+                <option value="R/v">Review</option>
+              </select>
+              <!-- end of dropdown -->
+              <button ng-click="submitGrade(data.gradeSelect)" class="btn btn-primary">Store Grade</button>
+            </form>
+
+            <div class="col-md-4 row">
+              <div class="col-md-offset-4 col-md-4">
+                <a role="button" class="btn btn-primary pull-right" href="/grades">Grades Table</a>
+              </div>
+              <div class="col-md-4">
+                <a role="button" class="btn btn-primary pull-right" href="/next_assignment">Next</a>
+              </div>
+            </div>
+          <% end %>
+        </div>
         <% if current_user.instructor %>
           <div class="instructor-previous-messages">
             <h3>Previous Comments made by you to students</h3>

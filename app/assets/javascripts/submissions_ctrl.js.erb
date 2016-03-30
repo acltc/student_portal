@@ -24,7 +24,12 @@
         } 
       }, function(response) {
       });
+
       $scope.getComments();
+      
+      $http.post('/api/v1/grades/check_current', { assignment_id: $scope.assignment_id, student_id: $scope.student_id }).then(function(response) {
+        $scope.current_grade = response.data.letter;
+      });
     }
 
     $scope.getComments = function() {
@@ -154,6 +159,19 @@
         var comment = response.data;
         $scope.comments.push(comment);
         $scope.commentText = "";
+      }, function(response) {
+      });
+    }
+
+    $scope.submitGrade = function(grade) {
+      var gradeObject = {
+        letter: grade,
+        assignment_id: $scope.assignment_id,
+        student_id: $scope.student_id 
+      };
+      $http.post('/api/v1/grades', gradeObject).then(function(response) {
+        $scope.current_grade = response.data.letter;
+        $scope.grade_form.$setPristine();
       }, function(response) {
       });
     }

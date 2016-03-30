@@ -3,6 +3,7 @@ class Assignment < ActiveRecord::Base
   has_many :comments
   has_many :users, through: :submissions
   belongs_to :assignment_version
+  has_many :grades
 
   def self.download_ebook_pdf
     credentials = Aws::Credentials.new(ENV['S3_KEY'], ENV['S3_SECRET'])
@@ -12,6 +13,10 @@ class Assignment < ActiveRecord::Base
         bucket_name: ENV['S3_BUCKET_NAME'],
         client: s3
     ).presigned_url(:get, expires_in: 60 * 60)
+  end
+
+  def table_style
+    id.even? ? "table-cell-even" : "table-cell-odd"
   end
 
 end
