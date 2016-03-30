@@ -1,0 +1,1 @@
+json.letter @grade.letter

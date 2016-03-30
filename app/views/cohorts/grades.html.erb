@@ -1,0 +1,31 @@
+
+<div ng-app="app">
+  <div ng-controller="gradesCtrl">
+    <% @grades.each do |week_num, student_grades| %>
+      <div class="white row">
+        <div class="col-md-12">
+          <h2>Week <%= week_num %></h2>
+          <table>
+            <thead>
+              <th></th>
+              <% assignments_by_week = @assignments.where(week: week_num) %>
+              <% assignments_by_week.each do |assignment| %>
+                <th class="rotate-grade-title grade-title-<%= week_num %>"><div><span><%= assignment.title %></span></div></th>
+              <% end %>
+            </thead>
+            <tbody>
+              <% student_grades.each do |student_num, student_assigned_grades| %>
+                <tr>
+                  <td class="text-center table-name"><%= @student_names[student_num] %></td>
+                  <% assignments_by_week.each do |assignment|%>
+                    <td class="text-center grade-table-cell <%= @submissions[assignment.id][student_num] ? @submissions[assignment.id][student_num].table_style(assignment.id, @start_date, week_num) : assignment.table_style %> <%= student_assigned_grades[assignment.id].table_style if student_assigned_grades[assignment.id] %>" ng-click="gradeLink(<%= assignment.id %>, <%= student_num %>)"><%= student_assigned_grades[assignment.id].letter if student_assigned_grades[assignment.id] %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

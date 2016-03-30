@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'pages#index'
   get '/curriculum' => 'curriculum#index'
   get '/curriculum/select_cohort' => 'curriculum#select_cohort'
+  get '/grades' => 'cohorts#grades'
+  get '/next_assignment' => 'assignments#next_to_grade'
   resources :cohorts
   resources :students
   resources :assignments
@@ -11,6 +13,8 @@ Rails.application.routes.draw do
       get 'submissions/download_file' => 'submissions#download_file'
       resources :submissions, format: "json"
       resources :comments, format: "json"
+      post '/grades', to: 'grades#create'
+      post '/grades/check_current', to: 'grades#check_current'
     end
   end
   

@@ -40,6 +40,25 @@ class CohortsController < ApplicationController
     end
   end
 
+  def grades
+    if params[:cohort_id]
+      cohort = Cohort.find(params[:cohort_id])
+    else
+      if params[:instructor_id]
+        instructor_id = params[:instructor_id]
+      else
+        instructor_id = current_user.id
+      end
+      cohort = Cohort.where(instructor_id: instructor_id).last
+    end
+
+    @student_names = cohort.student_names_for_table
+    @start_date = cohort.start_date
+    @grades = cohort.grades_for_table
+    @submissions = cohort.submissions_for_table
+    @assignments = Assignment.all
+  end
+
   private
 
   def cohort_params

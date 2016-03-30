@@ -1,0 +1,95 @@
+#show-grade{
+  display: inline-block;
+  margin: 2px;
+  height: 20px;
+  min-width: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: solid 2px black;
+  border-radius: 10%;
+}
+
+#show-grade-container.ng-dirty button { 
+  background-color: #AB1322; 
+}
+
+th.rotate-grade-title {
+  white-space: nowrap;
+}
+
+th.grade-title-1{
+  height: 150px;
+}
+th.grade-title-2{
+  height: 140px;
+}
+th.grade-title-3{
+  height: 140px;
+}
+
+th.rotate-grade-title > div {
+  transform: 
+    translate(25px, 51px)
+    rotate(315deg);
+  width: 30px;
+}
+th.rotate-grade-title > div > span {
+  border-bottom: 1px solid #ccc;
+}
+
+.grade-table-head{
+  height: 550px;
+}
+
+.grade-table-cell {
+  border: 1px solid black;
+}
+
+.table-name {
+  border-bottom: 1px solid black;
+  padding-right: 5px;
+}
+
+.table-cell-odd {
+  background-color: #F0F0F0;
+}
+
+.table-cell-even {
+  background-color: #C0C0C0;
+}
+
+.grade-table-submitted {
+  background-color: #ccff66;
+}
+
+.grade-table-submitted-even {
+  background-color: #99e600;
+}
+
+.grade-table-waited-for-weekend {
+  background-color: #ffe6b3;
+}
+
+.grade-table-waited-for-weekend-even {
+  background-color: #ffcc66;
+}
+
+.grade-table-late {
+  background-color: #ffc299;
+}
+
+.grade-table-late-even {
+  background-color:  #ff944d;
+}
+
+td.grade-table-review {
+ background-color: #80ccff;
+}
+
+td.grade-table-na {
+  background-color: black;
+}
+
+td.grade-table-notice {
+  background-color: #d9b3ff;
+}
