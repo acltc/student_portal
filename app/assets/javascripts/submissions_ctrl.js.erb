@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  angular.module("app").controller("submissionsCtrl", function($scope, $http, Upload) {
+  angular.module("app").controller("submissionsCtrl", function($scope, $compile, $http, Upload) {
     $scope.texts = [];
     $scope.files = [];
     $scope.comments = [];
@@ -158,6 +158,7 @@
       $http.post('/api/v1/comments', comment).then(function(response) {
         var comment = response.data;
         $scope.comments.push(comment);
+        $scope.commentText = "";
       }, function(response) {
       });
     }

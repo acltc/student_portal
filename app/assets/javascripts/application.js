@@ -25,4 +25,5 @@
 //= require prism
 //= require ng-prism
 //= require angular-sanitize.min
+//= require ng-bind-html-compile
 //= require_tree .

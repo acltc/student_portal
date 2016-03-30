@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # User.create!([
 #   {email: "joe@gmail.com", password: "password", role_id: 2, first_name: "Joe", last_name: "Marx"},
 #   {email: "test@test.com", password: "password", role_id: 3, cohort_id: 1, first_name: "Betty", last_name: "Sue"},
@@ -128,11 +129,11 @@
 # end
 
 
-Submission.delete_all
-User.where(role_id: 3).each do |student|
-  sub_time = Date.new(2016,3,27)
-  Assignment.all.each do |assignment|
-    Submission.create(user_id: student.id, assignment_id: assignment.id, created_at: sub_time)
-    sub_time += 12.hours
-  end
-end
+# Submission.delete_all
+# User.where(role_id: 3).each do |student|
+#   sub_time = Date.new(2016,3,27)
+#   Assignment.all.each do |assignment|
+#     Submission.create(user_id: student.id, assignment_id: assignment.id, created_at: sub_time)
+#     sub_time += 12.hours
+#   end
+# end
