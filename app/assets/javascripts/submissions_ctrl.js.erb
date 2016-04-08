@@ -171,7 +171,6 @@
       };
       $http.post('/api/v1/grades', gradeObject).then(function(response) {
         $scope.current_grade = response.data.letter;
-        log.console(gradeObject);
         $scope.grade_form.$setPristine();
       }, function(response) {
       });
