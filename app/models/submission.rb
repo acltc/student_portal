@@ -9,9 +9,9 @@ class Submission < ActiveRecord::Base
   def table_style(column_num, cohort_start, week_num)
     week_start = cohort_start + (7 * (week_num - 1)).days 
 
-    if created_at > week_start + 7.days
+    if created_at > week_start + 8.days
       message = "grade-table-late"
-    elsif created_at > week_start + 5.days
+    elsif created_at > week_start + 6.days
       message = "grade-table-waited-for-weekend"
     else
       message = "grade-table-submitted"
