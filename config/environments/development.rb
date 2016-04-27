@@ -38,10 +38,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.mandrillapp.com',
+    address: 'smtp.mailgun.org',
     port:    587,
-    domain:  'anyonecanlearntocode.com',
-    user_name: ENV["USER_NAME"],
-    password: ENV["PASSWORD"]
+    domain:  ENV["MAILGUN_DOMAIN"],
+    user_name: ENV["MAILGUN_USER_NAME"],
+    password: ENV["MAILGUN_PASSWORD"]
   }
 end
