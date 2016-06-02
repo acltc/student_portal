@@ -12,7 +12,7 @@
     $scope.combined_viewed = null;
     $scope.commentText = "";
 
-    $scope.setup = function(assignment_id, student_id) {
+    $scope.setup = function(assignment_id, student_id, current_user_id) {
       $scope.assignment_id = assignment_id;
       $scope.student_id = student_id;
       $http.get('/api/v1/submissions?assignment_id='+assignment_id+'&student_id='+student_id).then(function(response) {
@@ -25,21 +25,35 @@
       }, function(response) {
       });
 
-      $scope.getComments();
+      $scope.getComments(current_user_id);
       
       $http.post('/api/v1/grades/check_current', { assignment_id: $scope.assignment_id, student_id: $scope.student_id }).then(function(response) {
         $scope.current_grade = response.data.letter;
       });
     }
 
-    $scope.getComments = function() {
-      $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id).then(function(response) {
+    $scope.getComments = function(admin_id) {
+      $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id+'&admin_id='+admin_id).then(function(response) {
         $scope.comments = response.data["comments_per_student"];
         $scope.allStudentInstructorComments = response.data["instructor_comments"];
+        $scope.admins = $scope.admins || response.data["admins"];
+        $scope.selectedAdmin = $scope.selectedAdmin || $scope.selectCurrentUser(admin_id);
         if($scope.comments.length > 0) {
           $scope.checkViewedComment();
         }
       });
+    }
+
+    $scope.selectCurrentUser = function(admin_id) {
+      for (var i=0; i < $scope.admins.length; i++) {
+        if ($scope.admins[i].id === admin_id) {
+          return $scope.admins[i];
+        }
+      }
+    }
+
+    $scope.selectedAdminChanged = function(admin) {
+      $scope.getComments(admin.id);
     }
 
     $scope.getFiles = function() {
@@ -241,7 +255,7 @@
 
 
 
-    window.scope = $scope;
+    window.$scope = $scope;
 
   });
 })();
