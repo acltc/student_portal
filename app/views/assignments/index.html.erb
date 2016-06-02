@@ -4,7 +4,6 @@
 <div class="row message">
   <div class="col-md-7">
     <p><span class="prework-important">Prework is mandatory. You will not be allowed to start the program if you do not complete the Prework.</span> Give yourself plenty of time to complete the prework. If you're stuck and you just can't figure something out, reach out to your instructor <b><%= @cohort.instructor.full_name  %></b> (<%= mail_to @cohort.instructor.email %>).</p>
-    <p>The idea behind this prework is that you have a chance to dabble in Ruby so that it’s somewhat familiar to you by the time the official sessions begin. This is not meant to be highly intensive or intimidating, but you should expect to dedicate up to 20 hours per week to the prework. (Let us know if you're exceeding that.)</p>
     <p>View assignments below.</p>
   </div>
   <div class="col-md-5">
@@ -33,24 +32,16 @@
       <tabset justified="true">
         <tab heading="Prework Week 1" active="<%= @tab_index %> === 1">
           <div class="tab-heading">
-            <p>For week 1, the work is drawn from our screencasts (http://anyonecanlearntocode.com/screencasts) as well as the Learn To Program eBook by Chris Pine. You’ll note that there will be plenty of overlap between the two sources, and that’s intended. Having the same material taught in two different ways will help you see the same concept from multiple angles, and will provide for a deeper understanding of the lessons.</p>
-            <p>Please <%= link_to "click here", Assignment.download_ebook_pdf %> to download the ebook "Learn To Program." Please note: we pay for each student to have one copy; do not distribute to anyone else.</p>
           </div>
           <%= render 'table', week: 1 %>
         </tab>
         <tab heading="Prework Week 2" active="<%= @tab_index %> === 2">
           <div class="tab-heading">
-            <p>There are no videos to watch or books to read, as the exercises are predicated on what you've learned during Week #1. Some of these exercises are challenging, however, and will take time and effort. </p>
-            <p>The exercises are not necessarily listed in order of difficulty, so if you are absolutely stumped on one, move on to the next one in the meantime and go back to it later.</p>
           </div>
         <%= render 'table', week: 2 %>
         </tab>
         <tab heading="Prework Week 3" active="<%= @tab_index %> === 3">
           <div class="tab-heading">
-            <p>This week is actually divided into two parts: Ruby and HTML.</p>
-            <p>The Ruby prework is based on the remaining screencasts on the ACLTC website.</p>
-            <p>The HTML prework is also based on Screencasts.</p>
-          </div>
         <%= render 'table', week: 3 %>
         </tab>
       </tabset>
