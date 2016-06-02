@@ -13,4 +13,8 @@ if current_user.instructor
     json.student comment.student.full_name
     json.assignment comment.assignment.title
   end
+  json.admins @admins do |admin|
+    json.id admin.id
+    json.full_name admin.full_name
+  end
 end
