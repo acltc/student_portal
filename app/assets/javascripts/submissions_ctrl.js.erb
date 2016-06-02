@@ -38,6 +38,7 @@
         $scope.allStudentInstructorComments = response.data["instructor_comments"];
         $scope.admins = $scope.admins || response.data["admins"];
         $scope.selectedAdmin = $scope.selectedAdmin || $scope.selectCurrentUser(admin_id);
+        $scope.selectedAdminAfterLoad = $scope.selectedAdmin;
         if($scope.comments.length > 0) {
           $scope.checkViewedComment();
         }

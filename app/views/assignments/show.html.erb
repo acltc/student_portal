@@ -134,7 +134,7 @@
         </div>
         <% if current_user.instructor %>
           <div class="instructor-previous-messages">
-            <h3>Previous Comments made by {{ selectedAdmin.full_name }} to students</h3>
+            <h3>Previous Comments made by {{ selectedAdminAfterLoad.full_name }} to students</h3>
             <div>
               Choose Instructor:
               <select ng-model="selectedAdmin" ng-options="admin as admin.full_name for admin in admins" ng-change="selectedAdminChanged(selectedAdmin)"> 
@@ -149,7 +149,7 @@
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-4 student-commented">
-                      {{ selectedAdmin.full_name }} to {{comment.student}}:
+                      {{ selectedAdminAfterLoad.full_name }} to {{comment.student}}:
                     </div>
                     <div class="col-md-4 text-center assignment-commented">
                       {{comment.assignment}}
