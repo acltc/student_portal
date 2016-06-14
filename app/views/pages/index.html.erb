@@ -28,7 +28,7 @@
             <td><%= instructor.full_name %></td>
             <td>Lead Instructor</td>
             <td><%= instructor.email %></td>
-            <td><%= instructor.cohorts.last.location.name if instructor.cohorts %></td>
+            <td><%= instructor.cohorts.last.location.name if instructor.cohorts.any? %></td>
           </tr>
         <% end %>
       </table>
