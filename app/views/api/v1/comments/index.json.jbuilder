@@ -5,7 +5,7 @@ json.comments_per_student @comments do |comment|
   json.user comment.user
   json.viewed_by_admin comment.viewed_by_admin
 end
-if current_user.instructor
+if current_user.instructor_or_administrator
   json.instructor_comments @all_comments_from_instructor do |comment|
     json.id comment.id
     json.text comment.text
