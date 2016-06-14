@@ -132,7 +132,7 @@
             </div>
           <% end %>
         </div>
-        <% if current_user.instructor %>
+        <% if current_user.instructor_or_administrator %>
           <div class="instructor-previous-messages">
             <h3>Previous Comments made by {{ selectedAdminAfterLoad.full_name }} to students</h3>
             <div>
