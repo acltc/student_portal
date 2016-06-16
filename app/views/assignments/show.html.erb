@@ -103,7 +103,7 @@
           <div class="col-md-4 left-block">
             <button ng-click="submitCommentText(commentText)" class="btn btn-primary"> Leave Comment</button>
           </div>
-          <% if current_user.instructor %>
+          <% if current_user.instructor_or_administrator %>
             <form class="col-md-4 center-block" id="show-grade-container" name="grade_form">
               <p id="show-grade" ng-if="current_grade" class="center-text">{{ current_grade }}</p>
               <!-- grade dropdown -->
