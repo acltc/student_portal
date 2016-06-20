@@ -16,7 +16,7 @@
         <% @cohorts.each do |cohort| %>
           <div class="white">
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-8">
                 <h4>Instructor: <%= cohort.instructor.full_name %></br>
                   Start Date: <%= cohort.start_date.strftime("%b %d, %Y") %></br>
                   Location: <%= cohort.location.name %></br>
@@ -26,8 +26,9 @@
                   <%= link_to "Edit", edit_cohort_path(cohort) %>
                 </h4>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <a role="button" class="btn btn-primary pull-right" href="/next_assignment?cohort_id=<%= cohort.id %>">Next Assignment to Grade</a>
+                <a role="button" class="btn btn-primary pull-left" href="/grades?cohort_id=<%= cohort.id %>">Grades Table</a>
               </div>
             </div>
             <table class="table table-bordered">
