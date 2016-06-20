@@ -1,6 +1,9 @@
 
 <div ng-app="app">
   <div ng-controller="gradesCtrl">
+    <% if @grades.empty? %>
+      <h2 class="warning-text">No Grades Submitted</h2>
+    <% end %>
     <% @grades.each do |week_num, student_grades| %>
       <div class="white row">
         <div class="col-md-12">
