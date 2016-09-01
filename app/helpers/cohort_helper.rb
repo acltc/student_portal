@@ -7,7 +7,7 @@ module CohortHelper
   end
 
   def last_submission_or_comment(student)
-    "Week #{student.submissions.last.assignment.week}: #{student.submissions.last.assignment.title} (#{student.submissions.last.updated_at.strftime("%b %d")})"
+    "Phase #{student.submissions.last.assignment.week}: #{student.submissions.last.assignment.title} (#{student.submissions.last.updated_at.strftime("%b %d")})"
   end
 
   def link_to_assignment(student)

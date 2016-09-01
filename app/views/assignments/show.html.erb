@@ -14,7 +14,7 @@
         <br />
         <% end %>
         <br/>
-        Prework Week <%= @assignment.week %><br/>
+        Prework Phase <%= @assignment.week %><br/>
         <% @all_assignments_of_week.each do |assignment| %>
           <span class="<%= get_css_classes_assignment_show(@assignment, current_user, @student, assignment) %>">
             <%= link_to "#{assignment.title[0..17]}...", "/assignments/#{assignment.id}?student_id=#{@student.id}" %></span><br/>
