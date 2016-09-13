@@ -2,7 +2,7 @@
   <div class="col-md-7 welcome-text">
   <div class="welcome-message">
       <p>Welcome Students!</p>
-      <p>Welcome to Anyone Can Learn To Code! And it’s true - I believe that anyone can learn to code with the proper instruction and willingness to learn. I created this course because I am passionate about computer science and helping others learn through proper guidance and hands-on education.
+      <p>Welcome to Actualize! And it’s true - I believe that anyone can learn to code with the proper instruction and willingness to learn. I created this course because I am passionate about computer science and helping others learn through proper guidance and hands-on education.
       </p>
       <p>My goal as the Founder of Anyone Can Learn to Code is to help you not only learn invaluable new skills, but to help you launch into an exciting new career path. According to the Bureau of Labor Statistics, the demand for developers is at an all-time high, with over 140,000 new positions in CS being added every year and only 40,000 new college graduates available to fill these roles.
       </p>
@@ -20,19 +20,6 @@
       </div>
   </div>
 
-    <h2 class="contact-heading">Instructor + Mentor Contact Information</h2>
-    <div class="contact-table">
-      <table class="table">
-        <% @instructors.each do |instructor| %>
-          <tr>
-            <td><%= instructor.full_name %></td>
-            <td>Lead Instructor</td>
-            <td><%= instructor.email %></td>
-            <td><%= instructor.cohorts.last.location.name if instructor.cohorts.any? %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
   </div>
   <!-- <div class="col-md-1"></div> -->
   <div class="col-md-5">
