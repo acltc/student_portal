@@ -36,7 +36,7 @@ class StudentsController < ApplicationController
 
   def update
     @student = User.find(params[:id])
-    if @student.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email])
+    if @student.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], cohort_id: params[:cohort][:id])
       flash[:success] = "Account successfully updated"
       redirect_to cohorts_path
     else
