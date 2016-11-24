@@ -174,7 +174,9 @@
         var comment = response.data;
         $scope.comments.push(comment);
         $scope.commentText = "";
-        $scope.changeViewedByAdmin();
+        if (!$scope.submission_viewed) {
+          $scope.changeViewedByAdmin();
+        }
       }, function(response) {
       });
     }
@@ -188,7 +190,9 @@
       $http.post('/api/v1/grades', gradeObject).then(function(response) {
         $scope.current_grade = response.data.letter;
         $scope.grade_form.$setPristine();
-        $scope.changeViewedByAdmin();
+        if (!$scope.submission_viewed) {
+          $scope.changeViewedByAdmin();
+        }
       }, function(response) {
       });
     }
