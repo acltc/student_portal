@@ -43,8 +43,10 @@
             <div ng-if="texts[texts.length - 1].answer">
               <pre ng-prism class="line-numbers language-ruby"><code>{{ texts[texts.length - 1].answer }}</code></pre>
             </div>
-            <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Write Code Here ***"></textarea>
-            <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit Code</button>
+            <% if current_user.id == @student.id %>
+              <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Write Code Here ***"></textarea>
+              <button ng-click="submitText(submittedText.text)" class="btn btn-primary"> Submit Code</button>
+            <% end %>
           </tab>
           <tab heading="All Submitted Solutions">
             <div class="history-box">
