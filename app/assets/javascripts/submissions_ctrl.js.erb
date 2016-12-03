@@ -174,7 +174,7 @@
         var comment = response.data;
         $scope.comments.push(comment);
         $scope.commentText = "";
-        if (!$scope.submission_viewed) {
+        if ($scope.admins && !$scope.submission_viewed) {
           $scope.changeViewedByAdmin();
         }
       }, function(response) {
