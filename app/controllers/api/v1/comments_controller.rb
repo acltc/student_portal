@@ -12,8 +12,12 @@ class Api::V1::CommentsController < ApplicationController
     @comment = Comment.new(text: params[:comment_text], assignment_id: params[:assignment_id], user_id: current_user.id, student_id: params[:student_id] )
     if @comment.user.instructor_or_administrator
       @comment.viewed_by_admin = true
-      student = User.find(params[:student_id])
-      PortalMailer.notify_student(student, @comment).deliver_now
+      begin
+        student = User.find(params[:student_id])
+        PortalMailer.notify_student(student, @comment).deliver_now
+      rescue
+        @email_failed = true
+      end
     elsif @comment.user.student
       @comment.viewed_by_admin = false
     end
