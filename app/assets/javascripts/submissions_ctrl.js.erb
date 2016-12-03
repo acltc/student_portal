@@ -177,6 +177,9 @@
         if ($scope.admins && !$scope.submission_viewed) {
           $scope.changeViewedByAdmin();
         }
+        if (comment.email_failed) {
+          alert("Email failed to send!");
+        }
       }, function(response) {
       });
     }
