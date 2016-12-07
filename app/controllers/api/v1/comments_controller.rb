@@ -15,7 +15,9 @@ class Api::V1::CommentsController < ApplicationController
       begin
         student = User.find(params[:student_id])
         PortalMailer.notify_student(student, @comment).deliver_now
-      rescue
+      rescue Exception => ex
+        puts "error below"
+        puts ex
         @email_failed = true
       end
     elsif @comment.user.student
