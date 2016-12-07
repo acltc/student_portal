@@ -34,16 +34,17 @@ Rails.application.configure do
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.raise_delivery_errors = true
+  # config.assets.raise_runtime_errors = true
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      :user_name => ENV["SENDGRID_USERNAME"],
-      :password => ENV["SENDGRID_PASSWORD"],
-      :address => 'smtp.sendgrid.net',
-      :domain => 'acltc-student-portal.herokuapp.com',
-      :port => 587,
-      :authentication => :plain,
-      :enable_starttls_auto => true
-    }
+    :user_name => ENV["SENDGRID_USERNAME"],
+    :password => ENV["SENDGRID_PASSWORD"],
+    :domain => 'localhost',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end
