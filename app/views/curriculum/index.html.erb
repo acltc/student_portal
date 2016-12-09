@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<div ng-controller="calendarCtrl" ng-init="setup('<%= @cohort.gmail_calendar %>')">
+<div ng-controller="calendarCtrl" ng-init="setup('<%= @cohort.gmail_calendar %>','<%= ENV['API_KEY'] %>')">
   {{ alertMessage }}
   <div ui-calendar="uiConfig.calendar" class="div8 calendar" ng-model="eventSources"></div> 
 </div>

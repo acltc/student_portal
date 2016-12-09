@@ -9,9 +9,10 @@
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    $scope.setup = function(gmail_calendar) {
+    $scope.setup = function(gmail_calendar, api_key) {
+      $scope.api_key = api_key;
       $scope.eventSource = {
-        googleCalendarApiKey: '<%= ENV['API_KEY'] %>',
+        googleCalendarApiKey: $scope.api_key,
         url: gmail_calendar,
         className: 'gcal-event'           // an option!
       };
@@ -21,7 +22,7 @@
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            googleCalendarApiKey: '<%= ENV['API_KEY'] %>',
+            googleCalendarApiKey: $scope.api_key,
             url: $scope.gmail_calendar,
             className: 'gcal-event'           // an option!
     };
