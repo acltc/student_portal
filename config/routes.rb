@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :cohorts
   resources :students
   resources :assignments
+  get '/assignments/:id/show_demo', to: 'assignments#show_demo', as: 'assignment_show_demo'
+  resources :assignment_versions
   namespace :api do
     namespace :v1 do
       get 'submissions/download_file' => 'submissions#download_file'

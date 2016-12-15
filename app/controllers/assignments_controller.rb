@@ -15,18 +15,20 @@ class AssignmentsController < ApplicationController
     @all_assignments_of_week = @student.cohort.assignment_version.assignments.where(week: @assignment.week).order(:id)
   end
 
+  def show_demo
+    @assignment = Assignment.find(params[:id])
+  end
+
   def edit
     @assignment = Assignment.find(params[:id])
-    @student = User.find(params[:student_id])
   end
 
   def update
     @assignment = Assignment.find(params[:id])
-    @student = User.find(params[:assignment][:student_id])
     if @assignment.update(assignment_params)
-      flash[:success] = "Assignment exercise updated."
-      redirect_to "/assignments/#{@assignment.id}?student_id=#{@student.id}"
+      redirect_to assignment_show_demo_path(@assignment)
     else
+      flash[:warning] = "Assignment failed to update"
     end
   end
 

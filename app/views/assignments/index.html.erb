@@ -13,20 +13,9 @@
 
     <div class="white">
       <tabset justified="true">
-        <tab heading="Phase 1" active="<%= @tab_index %> === 1">
-          <div class="tab-heading">
-          </div>
-          <%= render 'table', week: 1 %>
-        </tab>
-        <tab heading="Phase 2" active="<%= @tab_index %> === 2">
-          <div class="tab-heading">
-          </div>
-        <%= render 'table', week: 2 %>
-        </tab>
-        <tab heading="Phase 3" active="<%= @tab_index %> === 3">
-          <div class="tab-heading">
-        <%= render 'table', week: 3 %>
-        </tab>
+        <% @assignments.select(:week).distinct.count.times do |index| %>
+          <%= render 'table', week: index + 1 %>
+        <% end %> 
       </tabset>
     </div>
   </div>

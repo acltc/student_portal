@@ -1,0 +1,33 @@
+<div class="row row-margin">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="white">
+      <div class="row">
+        <div class="col-md-12">
+          <h2><%= @assignment_version.description %></h2>
+          <table class="table">
+              <tr>
+                <th>Week</th>
+                <th>Title</th>
+                <th>Assignment Order</th>
+              </tr>
+            <%= form_tag assignment_version_path(@assignment_version), method: :patch do %>
+              <%= fields_for :assignments do |ff| %>
+                <% @assignment_version.assignments.order(:assignment_order).each do |assignment| %>
+                  <%= ff.fields_for "assignment-#{assignment.id}" do |fff| %>
+                    <tr>
+                      <td><%= fff.text_field :week, value: assignment.week  %></td>
+                      <td><%= link_to assignment.title, edit_assignment_path(assignment) %></td>
+                      <td><%= fff.text_field :order, value: assignment.assignment_order %></td>
+                    </tr>
+                <% end %>
+                <% end %>
+              <% end %>
+          </table>
+              <%= hidden_field_tag :assignment_version_id, @assignment_version.id %>
+              <%= submit_tag "Update Assignment Order", class: "btn btn-primary pull-right assignment-order-btn" %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+</div>

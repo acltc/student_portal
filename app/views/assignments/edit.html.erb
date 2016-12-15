@@ -1,6 +1,11 @@
 <div class="row row-margin">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+  <div class="col-md-2">
+      <div class="white">
+        <%= link_to @assignment.assignment_version.description, assignment_version_path %><br>
+        &#8627; <%= link_to "#{@assignment.title[0..17]}...", assignment_show_demo_path(@assignment) %><br>
+      </div>
+    </div>
+  <div class="col-md-10">
   <%= form_for @assignment do |f| %>
     <div class="form-group">
       <%= f.label :title %>
@@ -19,11 +24,9 @@
     <div class="check-box">  
       <%= f.check_box :attachment %> Do you want to allow students to upload files?
     </div>
-      <%= f.hidden_field(:student_id, value: @student.id) %>
     <div class="form-group">
       <%= f.submit "Update Assignment", class: "btn btn-primary" %>
     </div>
   <% end %>
   </div>
-<div class="col-md-2"></div>
 </div>

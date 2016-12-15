@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324192839) do
+ActiveRecord::Schema.define(version: 20161214163524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160324192839) do
     t.string   "title"
     t.integer  "assignment_version_id"
     t.boolean  "attachment"
+    t.integer  "assignment_order"
   end
 
   create_table "cohorts", force: :cascade do |t|
