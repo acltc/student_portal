@@ -5,28 +5,5 @@
         &#8627; <%= link_to "#{@assignment.title[0..17]}...", assignment_show_demo_path(@assignment) %><br>
       </div>
     </div>
-  <div class="col-md-10">
-  <%= form_for @assignment do |f| %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :youtube_id %>
-      <%= f.text_field :youtube_id, class: "form-control" %>
-      <p class="text-muted">If necessary</p>
-    </div>
-    <div class="form-group">
-      <%= f.label :question %>  
-      <p class="help-block">Code blocks must start with &#60;pre>&#60;code class="language-ruby"> and end with &#60;/code>&#60;/pre> where "ruby" can be any other language.</p>
-      <%= f.text_area :question, class: "form-control" %>
-    </div>
-    <div class="check-box">  
-      <%= f.check_box :attachment %> Do you want to allow students to upload files?
-    </div>
-    <div class="form-group">
-      <%= f.submit "Update Assignment", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-  </div>
+  <%= render 'form' %>
 </div>

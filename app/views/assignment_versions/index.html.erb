@@ -4,7 +4,7 @@
     <div class="white">
       <div class="row">
         <div class="col-md-12">
-          <h2>Assignment Versions</h2>
+          <h2>Exerise Versions</h2>
           <table class="table">
               <tr>
                 <th>ID</th>
@@ -21,6 +21,15 @@
               </tr>
             <% end %>
           </table>
+          <h3>Duplicate Older Version</h3>
+          <%= form_tag assignment_versions_path do %>
+            <div class="form-group">
+              <%= collection_select :assignment_version, :id, AssignmentVersion.all, :id, :description, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Duplicate", class: "btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

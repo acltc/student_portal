@@ -8,13 +8,13 @@ class AssignmentVersionsController < ApplicationController
     @assignment_version = AssignmentVersion.find(params[:id])
   end
 
-  def update # this needs to be updated to factor in week too
-    @assignment_orders = params[:assignment_orders]
-    @assignment_orders.each do |assignment_id, assignment_order|
-      Assignment.find(assignment_id).update(assignment_order: assignment_order)
+  def update
+    @assignments = params[:assignments]
+    @assignments.each do |assignment|
+      Assignment.find(assignment[:id]).update(week: assignment[:week], assignment_order: assignment[:order])
     end
+    flash[:success] = "Week & Order of exercises updated successfully"
     redirect_to assignment_version_path(params[:assignment_version_id])
   end
-
 
 end

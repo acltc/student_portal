@@ -15,6 +15,27 @@ class AssignmentsController < ApplicationController
     @all_assignments_of_week = @student.cohort.assignment_version.assignments.where(week: @assignment.week).order(:id)
   end
 
+  def new
+    @assignment = Assignment.new
+    assignment_version_id = params[:assignment_version_id]
+    asdfds
+    @assignment_version = AssignmentVersion.find(assignment_version_id)
+  end
+
+  def create
+    @assignment = Assignment.new(assignment_params)
+
+    if @assignment.save
+      flash[:success] = "Exercise saved."
+      redirect_to assignment_show_demo_path(@assignment)
+    else
+      flash[:danger] = "Exercise NOT saved. #{@assignment.errors.full_messages.join(', ')}"
+      assignment_version_id = params[:assignment][:assignment_version_id]
+      @assignment_version = AssignmentVersion.find(assignment_version_id)
+      render :new
+    end
+  end
+
   def show_demo
     @assignment = Assignment.find(params[:id])
   end
@@ -26,10 +47,20 @@ class AssignmentsController < ApplicationController
   def update
     @assignment = Assignment.find(params[:id])
     if @assignment.update(assignment_params)
-      redirect_to assignment_show_demo_path(@assignment)
     else
       flash[:warning] = "Assignment failed to update"
     end
+    redirect_to assignment_show_demo_path(@assignment)
+  end
+
+  def destroy
+    @assignment = Assignment.find(params[:id]).delete
+    if @assignment.delete
+      flash[:success] = "Exercise deleted"
+    else
+      flash[:danger] = "Exercise NOT deleted"
+    end
+    redirect_to assignment_version_path(@assignment.assignment_version)
   end
 
   def next_to_grade
@@ -52,7 +83,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:title, :question, :youtube_id, :attachment)
+    params.require(:assignment).permit(:week, :title, :question, :youtube_id, :attachment, :assignment_version_id)
   end
 
 end

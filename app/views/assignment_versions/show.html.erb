@@ -1,32 +1,38 @@
 <div class="row row-margin">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+  <div class="col-md-2">
+      <div class="white">
+        <%= link_to "All Assignment Versions", assignment_versions_path %><br>
+      </div>
+    </div>
+  <div class="col-md-10">
     <div class="white">
       <div class="row">
         <div class="col-md-12">
           <h2><%= @assignment_version.description %></h2>
-          <table class="table">
-              <tr>
-                <th>Week</th>
-                <th>Title</th>
-                <th>Assignment Order</th>
-              </tr>
             <%= form_tag assignment_version_path(@assignment_version), method: :patch do %>
-              <%= fields_for :assignments do |ff| %>
-                <% @assignment_version.assignments.order(:assignment_order).each do |assignment| %>
-                  <%= ff.fields_for "assignment-#{assignment.id}" do |fff| %>
-                    <tr>
-                      <td><%= fff.text_field :week, value: assignment.week  %></td>
-                      <td><%= link_to assignment.title, edit_assignment_path(assignment) %></td>
-                      <td><%= fff.text_field :order, value: assignment.assignment_order %></td>
-                    </tr>
-                <% end %>
-                <% end %>
-              <% end %>
-          </table>
+              <table class="table">
+                <tr>
+                  <th>Title</th>
+                  <th>Week</th>
+                  <th>Assignment Order</th>
+                  <th>Delete Assignment</th>
+                </tr>
+                  <%= fields_for 'assignments[]', [] do |f| %>
+                    <% @assignment_version.assignments.order(:assignment_order).each do |assignment| %>
+                        <tr>
+                          <%= f.hidden_field :id, value: assignment.id %>
+                          <td><%= link_to assignment.title, edit_assignment_path(assignment) %></td>
+                          <td><%= f.text_field :week, value: assignment.week  %></td>
+                          <td><%= f.text_field :order, value: assignment.assignment_order %></td>
+                          <td><%= link_to "Delete", assignment_path(assignment), method: "delete", data: {confirm: "Are you sure? Any cohort that uses this version will lost this exercise. Every student that's submitted a solution to this exercise will be lost."} %></td>
+                        </tr>
+                    <% end %>
+                  <% end %>
+                </table>
               <%= hidden_field_tag :assignment_version_id, @assignment_version.id %>
-              <%= submit_tag "Update Assignment Order", class: "btn btn-primary pull-right assignment-order-btn" %>
+              <%= submit_tag "Update Week and Order", class: "btn btn-danger pull-right assignment-order-btn btn-lg" %>
             <% end %>
+            <%= button_to "Add Exercise", new_assignment_path, class: "btn btn-primary", method: :get, params: {assignment_version_id: @assignment_version.id} %>
         </div>
       </div>
     </div>
