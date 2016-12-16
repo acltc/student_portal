@@ -4,7 +4,7 @@
       <div class="white">
         <%= link_to "Index", "/assignments/?student_id=#{@student.id}&tab_index=#{@assignment.week}" %><br/>
         <% if current_user.instructor_or_administrator  %>
-          <%= link_to "Edit Assignment", "/assignments/#{@assignment.id}/edit?student_id=#{@student.id}"  %><br/>
+          <%= link_to "Edit Exercise", "/assignments/#{@assignment.id}/edit" %><br/>
           <%= link_to "Cohort Dashboard", cohorts_path %><br/>
           <div ng-if="submission_viewed != null || comment_viewed != null">
             <input type="checkbox" value="true" ng-checked="combined_viewed" ng-click="changeViewedByAdmin()">

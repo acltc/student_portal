@@ -1,0 +1,41 @@
+<div class="row row-margin">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="white">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Exerise Versions</h2>
+          <table class="table">
+              <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+              </tr>
+            <% @assignment_versions.each do |assignment_version| %>
+              <tr>
+                <td><%= assignment_version.id %></td>
+                <td><%= link_to assignment_version.description, assignment_version_path(assignment_version) %></td>
+                <td><%= assignment_version.created_at %></td>
+                <td><%= assignment_version.updated_at %></td>
+              </tr>
+            <% end %>
+          </table>
+          <h3>Duplicate Older Version</h3>
+          <%= form_tag assignment_versions_path do %>
+            <div class="form-group">
+              <%= label_tag :description %>
+              <%= text_field_tag :description %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :assignment_version %>
+              <%= collection_select :assignment_version, :id, AssignmentVersion.all, :id, :description, class: "form-control", prompt: true %>
+            </div>
+            <div class="form-group">
+              <%= submit_tag "Duplicate", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>

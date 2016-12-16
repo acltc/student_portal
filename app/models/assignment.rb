@@ -5,6 +5,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :assignment_version
   has_many :grades
 
+  validates :week, :question, :title, presence: true
+
   def self.download_ebook_pdf
     credentials = Aws::Credentials.new(ENV['S3_KEY'], ENV['S3_SECRET'])
     s3 = Aws::S3::Client.new(region:'us-west-2', credentials: credentials)

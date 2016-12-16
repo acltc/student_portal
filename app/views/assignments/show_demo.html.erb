@@ -1,0 +1,25 @@
+<div class="row row-margin">
+  <div class="col-md-2">
+    <div class="white">
+      <%= link_to @assignment.assignment_version.description, assignment_version_path(@assignment.assignment_version) %><br>
+      &#8627; <%= @assignment.title[0..17] + "..." %><br>
+      <div class="assignment-sidebar">
+        <%= link_to "Edit", edit_assignment_path %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+  <div class="white demo-footer">
+      <h2>Exercise: <%= @assignment.title %></h2>
+      <% if @assignment.youtube_id.present? %>
+      <p>Please watch the video to complete the exercise below.</p>
+      <div class="embed-container">
+        <iframe src="//www.youtube.com/embed/<%= @assignment.youtube_id %>"></iframe> 
+      </div>
+      <% end %>
+      <div>
+        <%= @assignment.question.html_safe %>
+      </div>
+    </div>
+  </div>
+</div>

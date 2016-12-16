@@ -2,6 +2,7 @@
   <div class="row row-margin">
     <div class="col-md-2 white">
       <p><%= link_to "Create Cohort", new_cohort_path %></p> 
+      <p><%= link_to "Modify Exercises", assignment_versions_path %></p> 
       <p><%= link_to "Show All", cohorts_path %></p> 
       <% @instructors.each do |instructor| %>
         <p>Filter by: <%= link_to instructor.full_name, "/cohorts?instructor_id=#{instructor.id}" %></p>
