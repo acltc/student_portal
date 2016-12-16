@@ -24,7 +24,12 @@
           <h3>Duplicate Older Version</h3>
           <%= form_tag assignment_versions_path do %>
             <div class="form-group">
-              <%= collection_select :assignment_version, :id, AssignmentVersion.all, :id, :description, class: "form-control" %>
+              <%= label_tag :description %>
+              <%= text_field_tag :description %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :assignment_version %>
+              <%= collection_select :assignment_version, :id, AssignmentVersion.all, :id, :description, class: "form-control", prompt: true %>
             </div>
             <div class="form-group">
               <%= submit_tag "Duplicate", class: "btn btn-primary" %>

@@ -18,7 +18,6 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     assignment_version_id = params[:assignment_version_id]
-    asdfds
     @assignment_version = AssignmentVersion.find(assignment_version_id)
   end
 
@@ -42,6 +41,7 @@ class AssignmentsController < ApplicationController
 
   def edit
     @assignment = Assignment.find(params[:id])
+    @assignment_version = @assignment.assignment_version
   end
 
   def update
