@@ -1,7 +1,7 @@
 <div class="row row-margin">
   <div class="col-md-2">
       <div class="white">
-        <%= link_to @assignment.assignment_version.description, assignment_version_path %><br>
+        <%= link_to @assignment.assignment_version.description, assignment_version_path(@assignment.assignment_version) %><br>
         &#8627; <%= link_to "#{@assignment.title[0..17]}...", assignment_show_demo_path(@assignment) %><br>
       </div>
     </div>
