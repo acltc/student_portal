@@ -5,14 +5,14 @@ class AssignmentsController < ApplicationController
   def index
     @student = current_user.student ? current_user : User.find(params[:student_id])
     @cohort = @student.cohort
-    @assignments = @cohort.assignment_version.assignments.order(:id)
+    @assignments = @cohort.assignment_version.assignments.order(:assignment_order)
     @tab_index = params[:tab_index] || 1
   end
 
   def show
     @assignment = Assignment.find(params[:id])
     @student = User.find(params[:student_id])
-    @all_assignments_of_week = @student.cohort.assignment_version.assignments.where(week: @assignment.week).order(:id)
+    @all_assignments_of_week = @student.cohort.assignment_version.assignments.where(week: @assignment.week).order(:assignment_order)
   end
 
   def new
