@@ -1,4 +1,5 @@
 class AssignmentVersionsController < ApplicationController
+  before_action :authenticate_admin_user!
   
   def index
     @assignment_versions = AssignmentVersion.all
