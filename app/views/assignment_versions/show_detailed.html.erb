@@ -32,26 +32,6 @@
             </div>
             <% end %>
           </div>
-
-              <table class="table">
-                <tr>
-                  <th>Title</th>
-                  <th>Week</th>
-                  <th>Assignment Order</th>
-                  <th>Delete Assignment</th>
-                </tr>
-                  <%= fields_for 'assignments[]', [] do |f| %>
-                    <% @assignment_version.assignments.order(:assignment_order).each do |assignment| %>
-                        <tr>
-                          <%= f.hidden_field :id, value: assignment.id %>
-                          <td><%= link_to assignment.title, edit_assignment_path(assignment) %></td>
-                          <td><%= f.text_field :week, value: assignment.week  %></td>
-                          <td><%= f.text_field :order, value: assignment.assignment_order %></td>
-                          <td><%= link_to "Delete", assignment_path(assignment), method: "delete", data: {confirm: "Are you sure? Any cohort that uses this version will lost this exercise. Every student that's submitted a solution to this exercise will be lost."} %></td>
-                        </tr>
-                    <% end %>
-                  <% end %>
-                </table>
         </div>
       </div>
     </div>
