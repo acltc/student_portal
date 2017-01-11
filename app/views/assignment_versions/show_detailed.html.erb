@@ -2,7 +2,7 @@
   <div class="col-md-2">
       <div class="white">
         <%= link_to "All Assignment Versions", assignment_versions_path %><br>
-        <a href="/assignment_versions/<%= @assignment_version.id %>/show_detailed">Detailed view</a>
+        <a href="/assignment_versions/<%= @assignment_version.id %>">Regular view</a>
       </div>
     </div>
   <div class="col-md-10">
@@ -10,7 +10,29 @@
       <div class="row">
         <div class="col-md-12">
           <h2><%= @assignment_version.description %></h2>
-            <%= form_tag assignment_version_path(@assignment_version), method: :patch do %>
+          <ul class="nav nav-tabs">
+            <% @assignment_version.assignments.select(:week).distinct.count.times do |index| %>
+              <li class="<%= index == 0 ? 'active' : '' %>">
+                <a data-toggle="tab" href="#week-<%= index + 1 %>">Week <%= index + 1 %></a>
+              </li>
+            <% end %>
+          </ul>
+          <div class="tab-content">
+            <% @assignment_version.assignments.select(:week).distinct.count.times do |index| %>
+            <div id="week-<%= index + 1 %>" class="tab-pane fade in <%= index == 0 ? 'active' : '' %>">
+              <% @assignment_version.assignments.where(week: index + 1).order(:assignment_order).each do |assignment| %>
+                <div class="well">
+                  <a href="/assignments/<%= assignment.id %>/edit" target="_blank"><%= assignment.title %></a>
+                  <div>
+                    <%= assignment.question.html_safe %>
+                  </div>
+
+                </div>
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+
               <table class="table">
                 <tr>
                   <th>Title</th>
@@ -30,10 +52,6 @@
                     <% end %>
                   <% end %>
                 </table>
-              <%= hidden_field_tag :assignment_version_id, @assignment_version.id %>
-              <%= submit_tag "Update Week and Order", class: "btn btn-danger pull-right assignment-order-btn btn-lg" %>
-            <% end %>
-            <%= button_to "Add Exercise", new_assignment_path, class: "btn btn-primary", method: :get, params: {assignment_version_id: @assignment_version.id} %>
         </div>
       </div>
     </div>

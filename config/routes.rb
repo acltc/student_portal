@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :assignments
   get '/assignments/:id/show_demo', to: 'assignments#show_demo', as: 'assignment_show_demo'
   resources :assignment_versions
+  get '/assignment_versions/:id/show_detailed' => 'assignment_versions#show_detailed'
   namespace :api do
     namespace :v1 do
       get 'submissions/download_file' => 'submissions#download_file'

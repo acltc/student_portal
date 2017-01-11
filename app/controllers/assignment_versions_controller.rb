@@ -9,6 +9,10 @@ class AssignmentVersionsController < ApplicationController
     @assignment_version = AssignmentVersion.find(params[:id])
   end
 
+  def show_detailed
+    @assignment_version = AssignmentVersion.find(params[:id])
+  end
+
   def create
     new_assignment_version = AssignmentVersion.new(description: params[:description])
 
