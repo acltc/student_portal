@@ -1,4 +1,4 @@
-<tab heading="Phase <%= week %>" active="<%= @tab_index %> === <%= week %>">
+<tab heading="Week <%= week %>" active="<%= @tab_index %> === <%= week %>">
   <div class="tab-heading">
   </div>
   <table class="table">
@@ -6,7 +6,8 @@
       <th>Question</th>
       <th>Last Submission</th>
     </tr>
-    <% if week == 5 %>
+    <!-- temp solution for week 5 curriculum -->
+    <% if week == 5 %> 
       <tr>
         <td> Week 5 - Available Soon</td>
         <td></td>
@@ -18,6 +19,7 @@
         <td><%= link_to (@student.submissions.where(assignment_id: assignment.id).any? ? @student.submissions.where(assignment_id: assignment.id).last.updated_at.strftime("%b %d, %Y, %l:%M %p") : "Nothing Submitted"), "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
       </tr>
       <% end %>
+      <!-- ^^^^^^ adjust once week 5 is updated ^^^^^^ -->
     <% end %>
   </table>
 </tab>
