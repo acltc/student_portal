@@ -3,9 +3,9 @@ class CohortsController < ApplicationController
   
   def index
     if params[:instructor_id]
-      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).includes(:users).order("users.last_name")
+      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).order(:created_at => :desc).includes(:users).order("users.last_name")
     else
-      @cohorts = Cohort.all.includes(:users).order("users.last_name")
+      @cohorts = Cohort.all.order(:created_at => :desc).includes(:users).order("users.last_name")
     end
     @instructors = User.where(role_id: 2)
   end
