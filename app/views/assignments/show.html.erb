@@ -40,8 +40,8 @@
         <h2><%= @student.full_name %>'s Solution</h2>
         <tabset class="tab-box" justified="true">
           <tab heading="Most Recent Submitted Solution">
-            <div ng-if="texts[texts.length - 1].answer">
-              <pre ng-prism class="line-numbers language-ruby"><code>{{ texts[texts.length - 1].answer }}</code></pre>
+            <div ng-repeat="text in texts">
+              <pre ng-if="$index === texts.length - 1" ng-prism class="line-numbers language-ruby"><code>{{ text.answer }}</code></pre>
             </div>
             <% if current_user.id == @student.id %>
               <textarea ng-model="submittedText.text" class="form-control submission-box" placeholder="*** Write Code Here ***"></textarea>
