@@ -1,6 +1,21 @@
 body {
-  background: #D3CFC8;
-  font-family: 'Cambay', sans-serif;
+  background: #D4D4D4;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.full-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  pointer-events: none;
 }
 
 // pre {
@@ -41,7 +56,7 @@ body {
   left: 0;
   right: 0;
   z-index: 7000;
-  margin: 0% 5% 0% 5%;
+  margin: 4% 5% 0% 5%;
 }
 
 .warning-text {
@@ -53,12 +68,13 @@ body {
 
 
 .navbar {
+  min-height: 80px;
   margin-bottom: 0;
 }
 
 .navbar-default {
-  background-color: #16A496;
-  border-color: #E7E7E7;
+  background-color: #000;
+  border-color: #000;
 }
 
 .navbar-default .navbar-brand {
@@ -72,6 +88,7 @@ body {
 
 .navbar-default .navbar-nav > li > a {
     color: #f8f8ff;
+    line-height: 50px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -87,44 +104,65 @@ body {
 .navbar-default .navbar-toggle:focus {
   background-color: #FFFFFF;
 }
+
+.navbar-brand {
+  // padding: 0 15px;
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar-brand img {
+  height: 50px;
+}
 ////////////////// Welcome Page ////////////////////
 
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-}
-.row.no-gutters > [class^="col-"],
-.row.no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.img-responsive-parent {
-  margin: 0 -60px;
-}
-
 .welcome-message {
-  padding: 20px 75px 0px 0px;
-  font-size: 140%;
-}
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  padding: 1em;
+  margin-top: 10vh;
 
-.contact-heading {
-  background: #16A496;
-  color: #FFFFFF;
-  padding: 20px;
-  font-style: italic;
-  margin: 50px 0px 0px -15px;
+  h1 {
+    font-size: 5.5em;
+    text-align: center;
+  }
 }
+// .row.no-gutters {
+//   margin-right: 0;
+//   margin-left: 0;
+// }
+// .row.no-gutters > [class^="col-"],
+// .row.no-gutters > [class*=" col-"] {
+//   padding-right: 0;
+//   padding-left: 0;
+// }
 
-.contact-table {
-  padding-right: 75px;
-  font-size: 140%;
-}
+// .img-responsive-parent {
+//   margin: 0 -60px;
+// }
 
-.text-align-right {
-  text-align: right;
-  padding: 10px 100px;
-}
+// .welcome-message {
+//   padding: 20px 75px 0px 0px;
+//   font-size: 140%;
+// }
+
+// .contact-heading {
+//   background: #16A496;
+//   color: #FFFFFF;
+//   padding: 20px;
+//   font-style: italic;
+//   margin: 50px 0px 0px -15px;
+// }
+
+// .contact-table {
+//   padding-right: 75px;
+//   font-size: 140%;
+// }
+
+// .text-align-right {
+//   text-align: right;
+//   padding: 10px 100px;
+// }
 
 
 ////////////////////// Calendar ////////////////////////////
@@ -164,8 +202,8 @@ p.capstone_blog {
   background: #FFFFFF;
   padding: 10px;
   margin-top: 5px;
-  border-radius: 5px;
-  border: 2px solid #000000;
+  // border-radius: 5px;
+  // border: 2px solid #000000;
 }
 
 .fc-unthemed .fc-today {
@@ -173,9 +211,11 @@ p.capstone_blog {
 }
 
 .cohort-details-calendar {
-  background: #FFFFFF;
+  margin-top: 20px;
+  background: #000;
+  color: white;
   border: #000000 2px solid;
-  border-radius: 5px;
+  // border-radius: 5px;
   list-style-type: none;
   padding: 5px;
   font-size: 20px;
@@ -213,15 +253,15 @@ table.student {
 .white{
   background: #FFFFFF;
   padding: 20px 10px 10px 10px;
-  border-radius: 5px;
-  border: 2px solid #000000;
+  // border-radius: 5px;
+  border: 1px solid #eee;
   margin: 20px 0px 0px 0px;
 }
 
 .white-due{
   background: #FFFFFF;
   padding: 20px 10px 10px 10px;
-  border-radius: 5px;
+  // border-radius: 5px;
   border: 2px solid #000000;
   margin: 0px 0px 0px 0px;
 }
@@ -259,7 +299,7 @@ textarea.submission-box {
 
 .history-box {
   border: 1px solid #DDDDDD;
-  border-radius: 5px;
+  // border-radius: 5px;
   margin: 0px;
   padding: 15px 5px 5px 5px;
 }
@@ -298,7 +338,7 @@ textarea#assignment_question {
   border: 1px solid #000000;
   margin: 20px 0px 5px 0px;
   padding: 5px;
-  border-radius: 5px;
+  // border-radius: 5px;
 }
 
 .tab-box {
@@ -364,7 +404,7 @@ textarea#assignment_question {
   color: #333;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  // border-radius: 4px;
 }
 
 .demo-footer {

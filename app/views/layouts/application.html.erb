@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StudentPortal</title>
-  <link href='https://fonts.googleapis.com/css?family=Poiret+One|Josefin+Slab|Cambay' rel='stylesheet' type='text/css'>
+  <title>Student Portal</title>
+  <%= favicon_link_tag 'favicon.png' %>
+  <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -16,7 +17,7 @@
     </div>
   <% end %>
 </div>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -26,18 +27,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Actualize Student Portal</a>
+      <!-- <a class="navbar-brand" href="/">Actualize Student Portal</a> -->
+      <a class="navbar-brand" href="/">
+        <img class="logo" src="<%= asset_path 'actualize-logo-275.png' %>">
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Curriculum & Schedule", curriculum_path  %></li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to "Prework", assignments_path if current_user.student %></li>
           <li><%= link_to "Cohort Dashboard", cohorts_path unless current_user.student %></li>
+          <li><%= link_to "Curriculum Calendar", curriculum_path  %></li>
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Sign Out (#{current_user.full_name})", destroy_user_session_path, method: :delete %></li>
         <% else %>  
