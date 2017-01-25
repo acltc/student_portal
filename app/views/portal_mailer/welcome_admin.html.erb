@@ -1,0 +1,6 @@
+<p>Dear <%= @user.full_name %></p>
+<p>We have created you an account under type<strong><%= @user.role.category %></strong></p>
+<p>To login, go to <%= "https://#{ENV['DOMAIN']}/users/sign_in" %> to be taken to the Student Portal. Sign in with your email address <%= @user.email %> and the default password is "changeme"; please change this to a more secure password after logging in for the first time.</p>
+<p>Cheers,<br/>
+ACLTC Team
+</p>

@@ -7,6 +7,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @users = User.all
   end
 
+  def new_admin
+    @user = User.new
+  end
+
+  def create_admin
+    @user = User.new(email: params[:email], password: "changeme", first_name: params[:first_name], last_name: params[:last_name], role_id: params[:role][:id])
+    if @user.save
+      PortalMailer.welcome_admin(@user).deliver_now
+      flash[:success] = "Instructor/Admin Created"
+      redirect_to "/users/registrations"
+    else
+      render :new_admin
+    end
+  end
+
   def new_batch
     @cohort = Cohort.find(params[:cohort_id])
   end
@@ -36,15 +51,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to cohorts_path
   end
 
-  def edit_student
-    @student = User.find(params[:id])
+  def edit_user
+    @user = User.find(params[:id])
+    @cohort_id = @user.cohort.id if @user.cohort
   end
 
-  def update_student
-    @student = User.find(params[:id])
-    current_cohort_id = @student.cohort_id
-    if @student.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], cohort_id: params[:cohort][:id])
-      if current_cohort_id != @student.cohort_id
+  def update_user
+    @user = User.find(params[:id])
+    current_cohort_id = @user.cohort_id
+    if @user.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], role_id: params[:role][:id], cohort_id: params[:cohort][:id])
+      if current_cohort_id != @user.cohort_id
         @student.submissions.each do |submission|
           submission.answer = "[#{@student.email}] #{submission.answer}" if submission.answer
           submission.user_id = nil
@@ -60,7 +76,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def destroy
     @student = User.find(params[:id])
-    @student.destroy
+    @user.destroy
     flash[:success] = "Student Deleted"
     redirect_to cohorts_path
   end

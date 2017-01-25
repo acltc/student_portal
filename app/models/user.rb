@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
 
 
+  def self.instructors
+    User.joins(:role).where(roles: {category: "instructor"})
+  end
+
   def instructor
     true if role.category == "instructor"
   end

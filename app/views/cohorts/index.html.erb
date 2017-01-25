@@ -49,7 +49,7 @@
                   <td><%= student.full_name %></td>
                   <td><%= student.email %></td>
                   <td><%= link_to(student.submissions? ? last_submission_or_comment(student) : "Nothing Submitted", link_to_assignment(student)) %></td>
-                  <td><%= link_to "Edit", "/users/registrations/#{student.id}/edit_student" %></td>
+                  <td><%= link_to "Edit", "/users/registrations/#{student.id}/edit_user" %></td>
                   <td>
                     <%= link_to "Delete", users_registration_path(student), method: "delete", data: {confirm: "Are you sure? #{student.full_name}'s account and all their prework submitted will be deleted."} %>
          <!--            <a data-confirm="Are you sure?" data-method="delete" href="/students/<%= student.id %>" rel="nofollow">Delete</a> -->
