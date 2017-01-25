@@ -49,9 +49,9 @@
                   <td><%= student.full_name %></td>
                   <td><%= student.email %></td>
                   <td><%= link_to(student.submissions? ? last_submission_or_comment(student) : "Nothing Submitted", link_to_assignment(student)) %></td>
-                  <td><%= link_to "Edit", "students/#{student.id}/edit" %></td>
+                  <td><%= link_to "Edit", "/users/registrations/#{student.id}/edit_student" %></td>
                   <td>
-                    <%= link_to "Delete", student_path(student), method: "delete", data: {confirm: "Are you sure? #{student.full_name}'s account and all their prework submitted will be deleted."} %>
+                    <%= link_to "Delete", users_registration_path(student), method: "delete", data: {confirm: "Are you sure? #{student.full_name}'s account and all their prework submitted will be deleted."} %>
          <!--            <a data-confirm="Are you sure?" data-method="delete" href="/students/<%= student.id %>" rel="nofollow">Delete</a> -->
 
                   </td>
@@ -60,7 +60,7 @@
                 <% end %>
               </tbody>
             </table>
-            <%= link_to "Add Students", "/students/new?cohort_id=#{cohort.id}", class:"btn btn-success" %>
+            <%= link_to "Add Students", "/users/registrations/new_batch?cohort_id=#{cohort.id}", class:"btn btn-success" %>
           </div>
         <% end %>
       </div>

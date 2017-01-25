@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { registrations: 'users/registrations' }
+  devise_for :users, :controllers => { registrations: 'users/registrations'}
+  devise_scope :user do
+    namespace :users do
+      get "/registrations/new_batch", to: 'registrations#new_batch'
+      post "/registrations/create_batch", to: 'registrations#create_batch'
+      get "/registrations/:id/edit_student", to: 'registrations#edit_student'
+      patch "/registrations/:id/update_student", to: 'registrations#update_student'
+      resources :registrations
+    end
+  end
+
   root 'pages#index'
   get '/curriculum' => 'curriculum#index'
   get '/curriculum/select_cohort' => 'curriculum#select_cohort'
   get '/grades' => 'cohorts#grades'
   get '/next_assignment' => 'assignments#next_to_grade'
   resources :cohorts
-  resources :students
   resources :assignments
   get '/assignments/:id/show_demo', to: 'assignments#show_demo', as: 'assignment_show_demo'
   resources :assignment_versions

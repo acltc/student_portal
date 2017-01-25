@@ -1,9 +1,9 @@
 <div class="row row-margin">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-  <h2>Edit Student</h2>
+  <h2>Edit User</h2>
     <p class="warning-text"><%= @student.errors.full_messages.join("<br/>").html_safe if @student.errors %></p>
-    <%= form_tag student_path, method: "patch" do %>
+    <%= form_tag "/users/registrations/#{@student.id}/update_student", method: :patch do %>
       <div class="form-group">
         <%= label_tag :first_name %>
         <%= text_field_tag :first_name, @student.first_name, class: "form-control" %>
