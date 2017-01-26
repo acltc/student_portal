@@ -1,0 +1,31 @@
+<div class="row row-margin">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+  <h2>New Instructor/Admin</h2>
+    <p class="warning-text"><%= @user.errors.full_messages.join("<br/>").html_safe if @user.errors %></p>
+    <%= form_tag "/users/registrations/create_admin", method: :post do %>
+      <div class="form-group">
+        <%= label_tag :first_name %>
+        <%= text_field_tag :first_name, @user.first_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :last_name %>
+        <%= text_field_tag :last_name, @user.last_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, @user.email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :role, "Change role of user" %><br>
+        <%= collection_select :role, :id, Role.where.not(category: "student"), :id, :category %>
+        <p class="help-block">
+          Instructors can have cohorts assigned to them as the lead instructor. Administrators have full access to the Cohort Dashboard and User Management, but cannot be assigned as lead instructor to a cohort.
+        </p>
+      </div>
+      <div class="form-group">
+        <%= submit_tag "Create User", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

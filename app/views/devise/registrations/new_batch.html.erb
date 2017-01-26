@@ -6,7 +6,7 @@
     Start Date: <%= @cohort.start_date %><br/>
     Cohort Nickname: <%= @cohort.nickname %>
   </h4>
-  <%= form_tag students_path do %>
+  <%= form_tag "/users/registrations/create_batch" do %>
     <div class="form-group">
       <%= label_tag :student_details, "One each line, enter each students first name, last name, and email seperated by a comma." %><br/>
       <%= text_area_tag :student_details, nil, class: "form-control" %>

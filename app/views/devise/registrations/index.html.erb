@@ -1,0 +1,62 @@
+<div class="row row-margin">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="white">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>User Management</h2>
+          <%= button_to "Create Instructor/Admin", "/users/registrations/new_admin", method: :get, class: "btn btn-primary" %>
+          <br>
+          <div class="row">
+            <div class="col-md-9">
+              <%= form_tag "/users/registrations/search", class: "form-inline" do %>
+                <div class="form-group">
+                  <%= label_tag :search %>
+                  <%= text_field_tag :search, "", class: "form-control wide-search" %>
+                </div>
+                <div class="form-group">
+                  <%= submit_tag :search, class: "btn btn-success" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-3">
+              <%= button_to "Show All", "/users/registrations", method: :get, class: "btn btn-success pull-right" %>
+            </div>
+          </div>
+          <br>
+          <table class="table">
+              <tr>
+                <th class="text-right force-heading">First Name</th>
+                <th class="text-left">Last Name</th>
+                <th>User Type</th>
+                <th>Email</th>
+                <th>Cohort</th>
+                <th>User Created</th>
+              </tr>
+            <% @users.each do |user| %>     
+                <tr>
+                  <td class="text-right"><%= link_to user.first_name, "/users/registrations/#{user.id}/edit_user" %></td>
+                  <td class="text-left"><%= link_to user.last_name, "/users/registrations/#{user.id}/edit_user" %></td>
+                  <td><%= user.role.category %></td>
+                  <td><%= user.email %></td>
+                  <td>
+                    <ul>
+                      <% if user.cohort %>
+                        <li>Instructor: <%= user.cohort.instructor.full_name %></li>
+                        <li>Start Date: <%= user.cohort.start_date.strftime("%b %d, %Y") %></li>
+                        <li>Location: <%= user.cohort.location.name %></li>
+                        <li>Cohort Nickname: <%= user.cohort.nickname %></li>
+                      <% else %>
+                        <li>User does not belong to a cohort</li>
+                      <% end %>
+                    </ul>
+                  </td>
+                  <td><%= user.created_at.strftime("%b %d, %Y") %></td>
+                </tr>
+            <% end %>
+          </table>
+
+        </div>
+      </div>
+    </div>
+</div>
