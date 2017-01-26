@@ -7,6 +7,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @users = User.order(:last_name)
   end
 
+  def search
+    search = params[:search]
+    @users = User.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+    render :index
+  end
+
   def new_admin
     @user = User.new
   end

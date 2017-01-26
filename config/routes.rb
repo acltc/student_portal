@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations'}
   devise_scope :user do
     namespace :users do
+      post "/registrations/search", to: 'registrations#search'
       get "/registrations/new_admin", to: 'registrations#new_admin'
       post "/registrations/create_admin", to: 'registrations#create_admin'
       get "/registrations/new_batch", to: 'registrations#new_batch'
