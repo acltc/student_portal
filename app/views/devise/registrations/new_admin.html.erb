@@ -20,7 +20,7 @@
         <%= label_tag :role, "Change role of user" %><br>
         <%= collection_select :role, :id, Role.where.not(category: "student"), :id, :category %>
         <p class="help-block">
-          Instructors have the ability to have cohorts assigned to them as the lead instructor. Administrators have full access to the Cohort Dashboard and User Management, but cannot be assigned as lead instructor to a cohort.
+          Instructors can have cohorts assigned to them as the lead instructor. Administrators have full access to the Cohort Dashboard and User Management, but cannot be assigned as lead instructor to a cohort.
         </p>
       </div>
       <div class="form-group">
