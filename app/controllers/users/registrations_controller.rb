@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_account_update_params, only: [:update]
 
   def index
-    @users = User.all
+    @users = User.order(:last_name)
   end
 
   def new_admin
@@ -32,9 +32,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     errors = []
     students_details.each do |student_detail_string|
       student_details = student_detail_string.split(",")
-      first_name = student_details[0]
-      last_name = student_details[1]
-      email = student_details[2]
+      first_name = student_details[0].strip
+      last_name = student_details[1].strip
+      email = student_details[2].strip
       new_student = User.new(cohort_id: params[:cohort_id], email: email, first_name: first_name, last_name: last_name, password: "changeme", role_id: 3)
       if new_student.save
         PortalMailer.welcome_student(new_student).deliver_now
