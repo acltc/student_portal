@@ -7,7 +7,7 @@ class CohortsController < ApplicationController
     else
       @cohorts = Cohort.all.order(:created_at => :desc).includes(:users).order("users.last_name")
     end
-    @instructors = User.where(role_id: 2)
+    @instructors = User.instructors
   end
 
   def new

@@ -10,4 +10,9 @@ class PortalMailer < ApplicationMailer
     @comment = comment
     mail(from: "no-reply@anyonecanlearntocode.com", to: @student.email, subject: 'You have a new message from your instructor')
   end
+
+  def welcome_admin(user)
+    @user = user
+    mail(from: "no-reply@anyonecanlearntocode.com", to: @user.email, subject: "Welcome to the Anyone Can Learn To Code Student Portal #{@user.role.category.upcase}!")
+  end
 end

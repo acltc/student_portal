@@ -38,9 +38,12 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to "Prework", assignments_path if current_user.student %></li>
-          <li><%= link_to "Cohort Dashboard", cohorts_path unless current_user.student %></li>
+          <% if current_user.instructor_or_administrator %>
+            <li><%= link_to "User Management", users_registrations_path %></li>
+            <li><%= link_to "Cohort Dashboard", cohorts_path %></li>
+          <% end %>
           <li><%= link_to "Curriculum Calendar", curriculum_path  %></li>
-          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+          <li><%= link_to "Edit Profile", edit_users_registration_path(current_user) %></li>
           <li><%= link_to "Sign Out (#{current_user.full_name})", destroy_user_session_path, method: :delete %></li>
         <% else %>  
           <li><%= link_to "Sign In", new_user_session_path %></li>

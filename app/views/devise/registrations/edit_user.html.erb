@@ -1,0 +1,35 @@
+<div class="row row-margin">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+  <h2>Edit User</h2>
+    <p class="warning-text"><%= @user.errors.full_messages.join("<br/>").html_safe if @user.errors %></p>
+    <%= form_tag "/users/registrations/#{@user.id}/update_user", method: :patch do %>
+      <div class="form-group">
+        <%= label_tag :first_name %>
+        <%= text_field_tag :first_name, @user.first_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :last_name %>
+        <%= text_field_tag :last_name, @user.last_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, @user.email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :role, "Change role of user" %><br>
+        <%= collection_select :role, :id, Role.all, :id, :category, selected: @user.role.id %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :cohort, "Move student to different cohort" %><br>
+        <%= collection_select :cohort, :id, Cohort.all, :id, :all_attributes, prompt: true, selected: @cohort_id %>
+        <p class="help-block">
+          Ignore if Instructor or Administrator
+        </p>
+      </div>
+      <div class="form-group">
+        <%= submit_tag "Update User", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
