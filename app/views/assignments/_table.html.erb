@@ -6,20 +6,11 @@
       <th>Question</th>
       <th>Last Submission</th>
     </tr>
-    <!-- temp solution for week 5 curriculum -->
-    <% if week == 5 %> 
-      <tr>
-        <td> Week 5 - Available Soon</td>
-        <td></td>
-      </tr>
-    <% else %>
-      <% @assignments.where(week: week).each do |assignment| %>
-      <tr class="<%= get_css_classes_assignment_index(@student, assignment) %>">
-        <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
-        <td><%= link_to (@student.submissions.where(assignment_id: assignment.id).any? ? @student.submissions.where(assignment_id: assignment.id).last.updated_at.strftime("%b %d, %Y, %l:%M %p") : "Nothing Submitted"), "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
-      </tr>
-      <% end %>
-      <!-- ^^^^^^ adjust once week 5 is updated ^^^^^^ -->
+    <% @assignments.where(week: week).each do |assignment| %>
+    <tr class="<%= get_css_classes_assignment_index(@student, assignment) %>">
+      <td><%= link_to assignment.title, "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
+      <td><%= link_to (@student.submissions.where(assignment_id: assignment.id).any? ? @student.submissions.where(assignment_id: assignment.id).last.updated_at.strftime("%b %d, %Y, %l:%M %p") : "Nothing Submitted"), "/assignments/#{assignment.id}?student_id=#{@student.id}" %></td>
+    </tr>
     <% end %>
   </table>
 </tab>
