@@ -1,4 +1,8 @@
-<tab heading="Week <%= week %>" active="<%= @tab_index %> === <%= week %>">
+<% if week != 5 %>
+  <tab heading="Week <%= week %>" active="<%= @tab_index %> === <%= week %>">
+<% else %>
+  <tab heading="Review" active="<%= @tab_index %> === <%= week %>">
+<% end %>
   <div class="tab-heading">
   </div>
   <table class="table">
