@@ -18,7 +18,7 @@
           <div class="white">
             <div class="row">
               <div class="col-md-8">
-                <h4>Instructor: <%= cohort.instructor.full_name %></br>
+                <h4>Instructor: <%= cohort.instructor ? cohort.instructor.full_name : "" %></br>
                   Start Date: <%= cohort.start_date.strftime("%b %d, %Y") %></br>
                   Location: <%= cohort.location.name %></br>
                   Cohort Nickname: <%= cohort.nickname %></br>

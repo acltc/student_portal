@@ -41,7 +41,7 @@
                   <td><%= user.email %></td>
                   <td>
                     <ul>
-                      <% if user.cohort %>
+                      <% if user.cohort && user.cohort.instructor %>
                         <li>Instructor: <%= user.cohort.instructor.full_name %></li>
                         <li>Start Date: <%= user.cohort.start_date.strftime("%b %d, %Y") %></li>
                         <li>Location: <%= user.cohort.location.name %></li>
