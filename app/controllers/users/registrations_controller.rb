@@ -82,7 +82,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def destroy
     @student = User.find(params[:id])
-    @user.destroy
+    @student.destroy
     flash[:success] = "Student Deleted"
     redirect_to cohorts_path
   end
