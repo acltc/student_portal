@@ -16,12 +16,7 @@
         <div class="col-md-4 text-right">Location: <%= @cohort.location.name %></div>
       </div>
     </div>
-
-    <div ng-controller="calendarCtrl" ng-init="setup('<%= @cohort.gmail_calendar %>','<%= ENV['API_KEY'] %>')">
-      {{ alertMessage }}
-      <div ui-calendar="uiConfig.calendar" class="div8 calendar" ng-model="eventSources"></div> 
-    </div>
-
+    <iframe src="https://calendar.google.com/calendar/embed?src=<%= @cohort.gmail_calendar %>&ctz=America%2FChicago" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
   </div>
 </div>
 
