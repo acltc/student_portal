@@ -22,9 +22,18 @@
             <div id="week-<%= index + 1 %>" class="tab-pane fade in <%= index == 0 ? 'active' : '' %>">
               <% @assignment_version.assignments.where(week: index + 1).order(:assignment_order).each do |assignment| %>
                 <div class="well">
-                  <a href="/assignments/<%= assignment.id %>/edit" target="_blank"><%= assignment.title %></a>
-                  <div>
-                    <%= assignment.question.html_safe %>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <% if assignment.youtube_id.present? %>
+                        <iframe src="//www.youtube.com/embed/<%= assignment.youtube_id %>" style="width: 100%"></iframe>
+                      <% end %>
+                    </div>
+                    <div class="col-md-9">
+                      <a href="/assignments/<%= assignment.id %>/edit" target="_blank"><%= assignment.title %></a>
+                      <div>
+                        <%= assignment.question.html_safe %>
+                      </div>
+                    </div>
                   </div>
 
                 </div>
