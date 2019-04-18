@@ -23,13 +23,16 @@
               <% @assignment_version.assignments.where(week: index + 1).order(:assignment_order).each do |assignment| %>
                 <div class="well">
                   <div class="row">
-                    <div class="col-md-3">
-                      <% if assignment.youtube_id.present? %>
-                        <iframe src="//www.youtube.com/embed/<%= assignment.youtube_id %>" style="width: 100%"></iframe>
-                      <% end %>
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                       <a href="/assignments/<%= assignment.id %>/edit" target="_blank"><%= assignment.title %></a>
+                      <% if assignment.youtube_id.present? %>
+                        <div>
+                          <br>
+                          <a href="https://www.youtube.com/watch?v=<%= assignment.youtube_id %>" target="_blank">VIDEO LINK</a>
+                          <br>
+                          <br>
+                        </div>
+                      <% end %>
                       <div>
                         <%= assignment.question.html_safe %>
                       </div>
