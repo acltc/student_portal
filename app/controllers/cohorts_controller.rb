@@ -1,14 +1,15 @@
 class CohortsController < ApplicationController
   before_action :authenticate_admin_user!
-  
+
   def index
     if params[:instructor_id]
-      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).order(:created_at => :desc).includes(:users).order("users.last_name")
+      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).limit(6)
     elsif params[:all]
-      @cohorts = Cohort.all.order(:created_at => :desc).includes(:users).order("users.last_name")
+      @cohorts = Cohort.all
     else
-      @cohorts = Cohort.where(instructor_id: current_user.id).order(:created_at => :desc).includes(:users).order("users.last_name")
+      @cohorts = Cohort.where(instructor_id: current_user.id).limit(6)
     end
+    @cohorts = @cohorts.order(:created_at => :desc).includes(:users).order("users.last_name")
     @instructors = User.instructors
   end
 
@@ -56,7 +57,4 @@ class CohortsController < ApplicationController
   def cohort_params
     params.require(:cohort).permit(:instructor_id, :location_id, :assignment_version_id, :nickname, :start_date, :gmail_calendar)
   end
-
-
-
 end
