@@ -5,7 +5,7 @@
       <p><%= link_to "Modify Exercises", assignment_versions_path %></p> 
       <p><%= link_to "Show All", cohorts_path(all: true) %></p> 
       <% @instructors.each do |instructor| %>
-        <p>Filter by: <%= link_to instructor.full_name, "/cohorts?instructor_id=#{instructor.id}" %></p>
+        <p>Filter by: <%= link_to instructor.full_name, "/cohorts?instructor_id=#{instructor.id}&limit=6" %></p>
       <% end %>
         <p>key:<br/>
           <span class="un-viewed-key">Un-viewed Submission</span><br/>

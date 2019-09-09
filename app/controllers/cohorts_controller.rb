@@ -3,13 +3,16 @@ class CohortsController < ApplicationController
 
   def index
     if params[:instructor_id]
-      @cohorts = Cohort.where(instructor_id: params[:instructor_id]).limit(6)
+      @cohorts = Cohort.where(instructor_id: params[:instructor_id])
     elsif params[:all]
       @cohorts = Cohort.all
     else
-      @cohorts = Cohort.where(instructor_id: current_user.id).limit(6)
+      @cohorts = Cohort.where(instructor_id: current_user.id)
     end
     @cohorts = @cohorts.order(:created_at => :desc).includes(:users).order("users.last_name")
+    if params[:limit]
+      @cohorts = @cohorts.limit(params[:limit])
+    end
     @instructors = User.instructors
   end
 
