@@ -11,7 +11,7 @@ class CohortsController < ApplicationController
     end
     @cohorts = @cohorts.order(:created_at => :desc).includes(:users).order("users.last_name")
     if params[:limit]
-      @cohorts = @cohorts.limit(params[:limit])
+      @cohorts = @cohorts.first(params[:limit])
     end
     @instructors = User.instructors
   end
