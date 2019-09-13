@@ -11,7 +11,7 @@
           <table>
             <thead>
               <th></th>
-              <% assignments_by_week = @assignments.where(week: week_num).order(:id) %>
+              <% assignments_by_week = @assignments.where(week: week_num).order(:assignment_order) %>
               <% assignments_by_week.each do |assignment| %>
                 <th class="rotate-grade-title grade-title-<%= week_num %>"><div><span><%= assignment.title %></span></div></th>
               <% end %>
