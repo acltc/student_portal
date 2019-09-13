@@ -48,11 +48,7 @@ class CohortsController < ApplicationController
 
   def grades
     cohort = Cohort.find(params[:cohort_id])
-    @student_names = cohort.student_names_for_table
-    @start_date = cohort.start_date
-    @grades = cohort.grades_for_table
-    @submissions = cohort.submissions_for_table
-    @assignments = cohort.assignment_version.assignments
+    @data = cohort.submissions_by_week
   end
 
   private

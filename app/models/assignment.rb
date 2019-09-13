@@ -21,4 +21,7 @@ class Assignment < ActiveRecord::Base
     id.even? ? "table-cell-even" : "table-cell-odd"
   end
 
+  def short_title
+    title.truncate(40)
+  end
 end

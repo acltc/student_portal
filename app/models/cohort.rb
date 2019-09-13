@@ -13,41 +13,44 @@ class Cohort < ActiveRecord::Base
     "Start Date: #{start_date} Instructor: #{instructor.full_name} Location: #{location.name}"
   end
 
-  def grades_for_table
-      current_grades_ungrouped = self.grades
-
-      Hash[current_grades_ungrouped.group_by(&:week).map { |week_num, week_grades| 
-        [week_num, Hash[week_grades.group_by(&:user_id).map { |user_num, user_grades|
-          [user_num, Hash[user_grades.map { |grade_assessed| 
-            [grade_assessed.assignment_id, grade_assessed]
-            }]]
-          }]]
-        }.sort] 
-  end
-
-  def submissions_for_table
-      current_submissions_ungrouped = self.submissions
-
-      submissions = Hash[current_submissions_ungrouped.group_by(&:assignment_id).map { |assignment_num, assignment_submissions|
-        [assignment_num, Hash[assignment_submissions.map {|submission|
-          [submission.user_id, submission]
-          }]]
-        }]
-
-      submissions.default = {}
-      submissions
+  def submissions_by_week
+    assignments_by_week = assignment_version.assignments
+      .order(:assignment_order)
+      .group_by(&:week)
+    data = {}
+    assignments_by_week.each do |week, assignments|
+      data[week] = {
+        assignments: assignments,
+        students: []
+      }
+      users.order(:last_name).each do |user|
+        data[week][:students].push({
+          id: user.id,
+          name: "#{user.first_name} #{user.last_name[0]}",
+          assignments: assignments.map { |assignment|
+            submission = assignment.submissions.find_by(user_id: user.id)
+            submission_style = submission ? submission.table_style(assignment.id, start_date, week) : assignment.table_style
+            grade_style = submission && submission.grade ? submission.grade.table_style : ""
+            {
+              id: assignment.id,
+              assignment: assignment,
+              submission: submission,
+              submission_style: submission_style,
+              grade_style: grade_style
+            }
+          }
+        })
+      end
+    end
+    data
   end
 
   def students
     users.where(role_id: 3)
   end
 
-  def student_names_for_table
-    Hash[students.map { |student| [student.id, "#{student.first_name} #{student.last_name[0]}"]}]
-  end
-
   def next_submission_to_assess
-    
+
     submissions_holder = self.submissions.order(:assignment_id,:user_id).to_a
     grades_holder = self.grades
 
