@@ -20,7 +20,7 @@
                     class="text-center grade-table-cell <%= assignment[:submission_style] %> <%= assignment[:grade_style] %>"
                     ng-click="gradeLink(<%= assignment[:id] %>, <%= student[:id] %>)"
                   >
-                    <%= assignment[:submission].grade.letter if assignment[:submission] && assignment[:submission].grade %>
+                    <%= assignment[:grade].letter if assignment[:grade] %>
                   </td>
                 <% end %>
               </tr>

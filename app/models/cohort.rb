@@ -15,8 +15,10 @@ class Cohort < ActiveRecord::Base
 
   def submissions_by_week
     assignments_by_week = assignment_version.assignments
+      .includes(:submissions)
       .order(:assignment_order)
       .group_by(&:week)
+    grades = Grade.where(user_id: users.pluck(:id))
     data = {}
     assignments_by_week.each do |week, assignments|
       data[week] = {
@@ -28,13 +30,15 @@ class Cohort < ActiveRecord::Base
           id: user.id,
           name: "#{user.first_name} #{user.last_name[0]}",
           assignments: assignments.map { |assignment|
-            submission = assignment.submissions.find_by(user_id: user.id)
+            submission = assignment.submissions.select { |x| x.user_id == user.id }[0]
+            grade = submission ? grades.select { |x| x.user_id == user.id && x.assignment_id == assignment.id }[0] : nil
             submission_style = submission ? submission.table_style(assignment.id, start_date, week) : assignment.table_style
-            grade_style = submission && submission.grade ? submission.grade.table_style : ""
+            grade_style = grade ? grade.table_style : ""
             {
               id: assignment.id,
               assignment: assignment,
               submission: submission,
+              grade: grade,
               submission_style: submission_style,
               grade_style: grade_style
             }
