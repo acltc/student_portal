@@ -3,7 +3,7 @@
     <div class="col-md-2">
       <div class="white">
         <%= link_to "Index", "/assignments/?student_id=#{@student.id}&tab_index=#{@assignment.week}" %><br/>
-        <% if current_user.instructor_or_administrator  %>
+        <% if current_user.instructor_or_administrator %>
           <%= link_to "Edit Exercise", "/assignments/#{@assignment.id}/edit" %><br/>
           <%= link_to "Cohort Dashboard", cohorts_path %><br/>
           <div ng-if="submission_viewed != null || comment_viewed != null">
@@ -146,7 +146,10 @@
           <% end %>
         </div>
         <% if current_user.instructor_or_administrator %>
-          <div class="instructor-previous-messages">
+          <div class="instructor-previous-messages" ng-if="!commentsLoaded">
+            <button class="btn btn-primary" ng-click="getComments(<%= current_user.id %>)">Load previous comments</button>
+          </div>
+          <div class="instructor-previous-messages" ng-if="commentsLoaded">
             <h3>Previous Comments made by {{ selectedAdminAfterLoad.full_name }} to students</h3>
             <div>
               Choose Instructor:

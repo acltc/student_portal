@@ -11,6 +11,7 @@
     $scope.comment_viewed = null;
     $scope.combined_viewed = null;
     $scope.commentText = "";
+    $scope.commentsLoaded = false;
 
     $scope.setup = function(assignment_id, student_id, current_user_id) {
       $scope.assignment_id = assignment_id;
@@ -25,7 +26,7 @@
       }, function(response) {
       });
 
-      $scope.getComments(current_user_id);
+      // $scope.getComments(current_user_id);
       
       $http.post('/api/v1/grades/check_current', { assignment_id: $scope.assignment_id, student_id: $scope.student_id }).then(function(response) {
         $scope.current_grade = response.data.letter;
@@ -34,6 +35,7 @@
 
     $scope.getComments = function(admin_id) {
       $http.get('/api/v1/comments?assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id+'&admin_id='+admin_id).then(function(response) {
+        $scope.commentsLoaded = true;
         $scope.comments = response.data["comments_per_student"];
         $scope.allStudentInstructorComments = response.data["instructor_comments"];
         $scope.admins = $scope.admins || response.data["admins"];
