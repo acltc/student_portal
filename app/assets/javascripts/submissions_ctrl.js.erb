@@ -26,10 +26,16 @@
       }, function(response) {
       });
 
-      // $scope.getComments(current_user_id);
+      $scope.getAssignmentComments(current_user_id);
       
       $http.post('/api/v1/grades/check_current', { assignment_id: $scope.assignment_id, student_id: $scope.student_id }).then(function(response) {
         $scope.current_grade = response.data.letter;
+      });
+    }
+
+    $scope.getAssignmentComments = function(admin_id) {
+      $http.get('/api/v1/comments?instructor=false&assignment_id='+$scope.assignment_id+'&student_id='+$scope.student_id+'&admin_id='+admin_id).then(function(response) {
+        $scope.comments = response.data["comments_per_student"];
       });
     }
 

@@ -1,15 +1,17 @@
 class Api::V1::CommentsController < ApplicationController
-
   def index
     @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]]).order(:id)
-    if current_user.instructor_or_administrator
+    if current_user.instructor_or_administrator && params[:instructor] != "false"
       @all_comments_from_instructor = Comment.where(user_id: params[:admin_id]).order("assignment_id = #{params[:assignment_id]} DESC, id DESC")
-      @admins = User.where(role_id: [1,2])
+      @admins = User.where(role_id: [1, 2])
+    else
+      @all_comments_from_instructor = []
+      @admins = []
     end
   end
 
   def create
-    @comment = Comment.new(text: params[:comment_text], assignment_id: params[:assignment_id], user_id: current_user.id, student_id: params[:student_id] )
+    @comment = Comment.new(text: params[:comment_text], assignment_id: params[:assignment_id], user_id: current_user.id, student_id: params[:student_id])
     if @comment.user.instructor_or_administrator
       @comment.viewed_by_admin = true
       begin
@@ -31,8 +33,7 @@ class Api::V1::CommentsController < ApplicationController
     view_boolean = params[:update_viewed]
     comments = Comment.where("student_id = ? AND assignment_id = ?", @comment.student_id, @comment.assignment_id)
     if comments.update_all(viewed_by_admin: view_boolean)
-      render json: {comment: comments.last}
+      render json: { comment: comments.last }
     end
   end
-
 end
