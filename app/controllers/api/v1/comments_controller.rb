@@ -3,7 +3,7 @@ class Api::V1::CommentsController < ApplicationController
     @comments = Comment.where(["assignment_id = ? and student_id = ?", params[:assignment_id], params[:student_id]]).order(:id)
     if current_user.instructor_or_administrator && params[:instructor] != "false"
       @all_comments_from_instructor = Comment
-        .includes(:user, :assignment)
+        .includes(:assignment)
         .where(user_id: params[:admin_id])
         .order("assignment_id = #{params[:assignment_id]} DESC, id DESC")
       @admins = User.where(role_id: [1, 2])
