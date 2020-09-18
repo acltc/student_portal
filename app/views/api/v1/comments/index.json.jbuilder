@@ -10,7 +10,7 @@ if current_user.instructor_or_administrator
     json.id comment.id
     json.text comment.text
     json.created_at comment.created_at.strftime("%m/%d/%Y, %I:%M:%S %p")
-    json.student comment.student.full_name
+    json.student "#{comment.user.first_name} #{comment.user.last_name}"
     json.assignment comment.assignment.title
   end
   json.admins @admins do |admin|
