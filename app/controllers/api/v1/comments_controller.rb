@@ -6,6 +6,7 @@ class Api::V1::CommentsController < ApplicationController
         .includes(:assignment)
         .where(user_id: params[:admin_id])
         .order("assignment_id = #{params[:assignment_id]} DESC, id DESC")
+        .limit(100)
       @admins = User.where(role_id: [1, 2])
     else
       @all_comments_from_instructor = []
